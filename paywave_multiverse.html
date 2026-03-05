@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>VEDANTGR20 | Roblox Systems Developer</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+background:#050508;
+color:white;
+font-family:Inter;
+overflow-x:hidden;
+}
+
+.container{
+width:90%;
+max-width:1200px;
+margin:auto;
+}
+
+header{
+position:fixed;
+width:100%;
+background:rgba(0,0,0,.6);
+backdrop-filter:blur(10px);
+padding:18px 0;
+z-index:1000;
+}
+
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+font-family:Orbitron;
+font-weight:700;
+font-size:22px;
+color:#4da3ff;
+}
+
+nav ul{
+display:flex;
+gap:25px;
+list-style:none;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+opacity:.8;
+font-size:14px;
+}
+
+nav a:hover{
+opacity:1;
+}
+
+.hero{
+height:100vh;
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+background:radial-gradient(circle at top,#151535,#050508);
+}
+
+.hero h1{
+font-size:60px;
+font-family:Orbitron;
+margin-bottom:15px;
+}
+
+.hero span{
+color:#4da3ff;
+}
+
+.hero p{
+opacity:.85;
+margin-bottom:35px;
+}
+
+.cta{
+padding:14px 36px;
+background:#4da3ff;
+border-radius:10px;
+font-weight:600;
+display:inline-block;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:25px;
+margin-top:70px;
+}
+
+.stat{
+background:#0f0f18;
+padding:28px;
+border-radius:12px;
+}
+
+.stat h2{
+color:#4da3ff;
+font-size:28px;
+}
+
+.section{
+padding:110px 0;
+}
+
+.section-title{
+text-align:center;
+font-size:36px;
+margin-bottom:60px;
+font-family:Orbitron;
+}
+
+.projects{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:28px;
+}
+
+.card{
+background:#0f0f18;
+padding:28px;
+border-radius:14px;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-8px);
+background:#151528;
+}
+
+.card h3{
+color:#4da3ff;
+margin-bottom:10px;
+}
+
+.skills{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+}
+
+.skill{
+background:#0f0f18;
+padding:20px;
+text-align:center;
+border-radius:10px;
+}
+
+pre{
+background:#0b0b12;
+padding:15px;
+border-radius:8px;
+overflow-x:auto;
+font-size:13px;
+margin-top:10px;
+}
+
+code{
+color:#4da3ff;
+font-family:monospace;
+}
+
+.contact{
+text-align:center;
+}
+
+.discord{
+display:inline-block;
+margin-top:30px;
+background:#5865F2;
+padding:16px 44px;
+border-radius:12px;
+font-weight:600;
+}
+
+footer{
+margin-top:80px;
+padding:30px;
+text-align:center;
+border-top:1px solid #1a1a1a;
+opacity:.6;
+}
+
+canvas{
+position:fixed;
+top:0;
+left:0;
+z-index:-1;
+}
+
+</style>
+</head>
+
+<body>
+
+<canvas id="bg"></canvas>
+
+<header>
+<div class="container">
+
+<nav>
+
+<div class="logo">VEDANTGR20</div>
+
+<ul>
+<li><a href="#about">About</a></li>
+<li><a href="#projects">Projects</a></li>
+<li><a href="#code">Code</a></li>
+<li><a href="#skills">Skills</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+
+</nav>
+
+</div>
+</header>
+
+<section class="hero">
+
+<div class="container">
+
+<h1>Advanced <span>Roblox Scripter</span></h1>
+
+<p>5+ Years Experience • $178K+ Revenue Generated • Systems Developer</p>
+
+<a class="cta" href="#contact">Hire Me</a>
+
+<div class="stats">
+
+<div class="stat">
+<h2>5+</h2>
+<p>Years Experience</p>
+</div>
+
+<div class="stat">
+<h2>$178K+</h2>
+<p>Total Revenue</p>
+</div>
+
+<div class="stat">
+<h2>4+</h2>
+<p>Major Projects</p>
+</div>
+
+<div class="stat">
+<h2>Advanced</h2>
+<p>Lua Developer</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="about">
+
+<div class="container">
+
+<h2 class="section-title">About Me</h2>
+
+<p style="max-width:750px;margin:auto;text-align:center">
+I am VEDANTGR20, a Roblox developer specializing in advanced Lua scripting,
+server-client architecture, and scalable gameplay systems.  
+Over the last 5 years I have worked with development teams creating
+successful Roblox experiences generating over $178,000 in revenue.
+</p>
+
+</div>
+
+</section>
+
+<section class="section" id="projects">
+
+<div class="container">
+
+<h2 class="section-title">Projects</h2>
+
+<div class="projects">
+
+<div class="card">
+<h3>Anime Rampage</h3>
+<p>Advanced Scripter</p>
+<p>10% Revenue Share</p>
+<p>$78,000 Revenue</p>
+</div>
+
+<div class="card">
+<h3>Anime Singularity</h3>
+<p>Scripter</p>
+<p>23% Revenue Share</p>
+<p>$13,400 Revenue</p>
+</div>
+
+<div class="card">
+<h3>Anime.Co</h3>
+<p>Scripter</p>
+<p>43% Revenue Share</p>
+<p>$6,900 Revenue</p>
+</div>
+
+<div class="card">
+<h3>The Trio Development</h3>
+<p>Advanced Scripter</p>
+<p>12% Revenue Share</p>
+<p>$80,340 Revenue</p>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="code">
+
+<div class="container">
+
+<h2 class="section-title">Code Showcase</h2>
+
+<div class="projects">
+
+<div class="card">
+<h3>Combat System Framework</h3>
+
+<pre><code>
+local Combat = {}
+Combat.__index = Combat
+
+function Combat.new(player)
+    local self = setmetatable({}, Combat)
+    self.Player = player
+    self.Combo = 0
+    self.LastAttack = 0
+    return self
+end
+
+function Combat:Attack()
+
+    local now = tick()
+
+    if now - self.LastAttack > 1 then
+        self.Combo = 0
+    end
+
+    self.Combo += 1
+    self.LastAttack = now
+
+    return self.Combo
+end
+
+return Combat
+</code></pre>
+
+</div>
+
+<div class="card">
+<h3>Optimized DataStore Handler</h3>
+
+<pre><code>
+local DataStoreService = game:GetService("DataStoreService")
+local PlayerData = DataStoreService:GetDataStore("PlayerData")
+
+local DataHandler = {}
+
+function DataHandler:Load(player)
+
+    local success,data = pcall(function()
+        return PlayerData:GetAsync(player.UserId)
+    end)
+
+    if success and data then
+        return data
+    else
+        return {
+            Coins = 0,
+            Level = 1
+        }
+    end
+end
+
+function DataHandler:Save(player,data)
+
+    pcall(function()
+        PlayerData:SetAsync(player.UserId,data)
+    end)
+
+end
+
+return DataHandler
+</code></pre>
+
+</div>
+
+<div class="card">
+<h3>Secure Remote Validation</h3>
+
+<pre><code>
+local Remote = game.ReplicatedStorage:WaitForChild("Attack")
+
+Remote.OnServerEvent:Connect(function(player,action)
+
+    if typeof(action) ~= "string" then return end
+
+    if action == "Punch" then
+
+        local character = player.Character
+        if not character then return end
+
+        local humanoid = character:FindFirstChild("Humanoid")
+        if not humanoid then return end
+
+        humanoid:TakeDamage(10)
+
+    end
+
+end)
+</code></pre>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section" id="skills">
+
+<div class="container">
+
+<h2 class="section-title">Skills</h2>
+
+<div class="skills">
+
+<div class="skill">Advanced Lua</div>
+<div class="skill">Roblox Studio</div>
+<div class="skill">Combat Systems</div>
+<div class="skill">Ability Frameworks</div>
+<div class="skill">Inventory Systems</div>
+<div class="skill">Quest Systems</div>
+<div class="skill">DataStore Systems</div>
+<div class="skill">Server Optimization</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section class="section contact" id="contact">
+
+<div class="container">
+
+<h2 class="section-title">Contact</h2>
+
+<p>Interested in working together on a Roblox project?</p>
+
+<a class="discord">Discord: VEDANTGR20</a>
+
+</div>
+
+</section>
+
+<footer>
+VEDANTGR20 • Roblox Developer Portfolio
+</footer>
+
+<script>
+
+const canvas=document.getElementById("bg")
+const ctx=canvas.getContext("2d")
+
+canvas.width=window.innerWidth
+canvas.height=window.innerHeight
+
+let particles=[]
+
+for(let i=0;i<80;i++){
+particles.push({
+x:Math.random()*canvas.width,
+y:Math.random()*canvas.height,
+size:Math.random()*2,
+speed:Math.random()*0.5
+})
+}
+
+function animate(){
+
+ctx.clearRect(0,0,canvas.width,canvas.height)
+
+particles.forEach(p=>{
+p.y+=p.speed
+
+if(p.y>canvas.height)p.y=0
+
+ctx.fillStyle="#4da3ff"
+ctx.fillRect(p.x,p.y,p.size,p.size)
+
+})
+
+requestAnimationFrame(animate)
+
+}
+
+animate()
+
+</script>
+
+</body>
+</html>
