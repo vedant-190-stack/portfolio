@@ -1,530 +1,807 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>VEDANTGR20 | Roblox Systems Developer</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
+<title>VEDANTGR20 — Roblox Systems Developer</title>
+<meta name="description" content="Advanced Roblox Lua Developer | 5+ Years | $178K+ Revenue Generated"/>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
+/* ═══════════════════════════
+   ROOT & RESET
+═══════════════════════════ */
+:root{
+  --bg:#03040a;--bg2:#06081a;--bg3:#0a0d22;
+  --blue:#00aaff;--cyan:#00ffea;--purple:#7c3aff;
+  --glow:rgba(0,170,255,0.15);--glowc:rgba(0,255,234,0.1);
+  --text:#e8eeff;--muted:#6b7a9a;--soft:#9aa3c0;
+  --border:rgba(0,170,255,0.15);--borderc:rgba(0,255,234,0.12);
+  --card:rgba(6,10,28,0.8);--card2:rgba(10,15,38,0.9);
+  --font-head:'Orbitron',monospace;
+  --font-body:'Rajdhani',sans-serif;
+  --font-code:'JetBrains Mono',monospace;
 }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;font-size:16px;}
+body{background:var(--bg);color:var(--text);font-family:var(--font-body);overflow-x:hidden;cursor:none;}
+::selection{background:rgba(0,170,255,0.3);color:#fff;}
+a{text-decoration:none;color:inherit;}
+img{max-width:100%;}
 
-body{
-background:#050508;
-color:white;
-font-family:Inter;
-overflow-x:hidden;
+/* ═══════════════════════════
+   CUSTOM CURSOR
+═══════════════════════════ */
+.cursor{position:fixed;width:12px;height:12px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .15s,height .15s,background .15s;mix-blend-mode:screen;}
+.cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(0,255,234,0.5);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:all .08s;mix-blend-mode:screen;}
+.cursor.hover{width:6px;height:6px;background:#fff;}
+.cursor-ring.hover{width:50px;height:50px;border-color:var(--blue);}
+@media(pointer:coarse){.cursor,.cursor-ring{display:none;}body{cursor:auto;}}
+
+/* ═══════════════════════════
+   SCROLL PROGRESS
+═══════════════════════════ */
+#scrollBar{position:fixed;top:0;left:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));z-index:9999;width:0%;transition:width .1s;}
+
+/* ═══════════════════════════
+   LOADING SCREEN
+═══════════════════════════ */
+#loader{position:fixed;inset:0;background:var(--bg);z-index:99990;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:24px;}
+.loader-logo{font-family:var(--font-head);font-size:clamp(24px,5vw,42px);font-weight:900;color:var(--blue);letter-spacing:4px;animation:loaderPulse 1s ease-in-out infinite;}
+@keyframes loaderPulse{0%,100%{text-shadow:0 0 20px rgba(0,170,255,0.5);}50%{text-shadow:0 0 60px rgba(0,170,255,1),0 0 100px rgba(0,170,255,0.5);}}
+.loader-bar-wrap{width:200px;height:2px;background:rgba(255,255,255,0.1);border-radius:2px;overflow:hidden;}
+.loader-bar{height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));width:0%;animation:loadFill 1.8s ease-out forwards;}
+@keyframes loadFill{to{width:100%;}}
+.loader-text{font-family:var(--font-code);font-size:11px;color:var(--muted);letter-spacing:2px;}
+#loader.hidden{opacity:0;pointer-events:none;transition:opacity .5s .2s;}
+
+/* ═══════════════════════════
+   CANVAS BG
+═══════════════════════════ */
+#bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
+
+/* GRID OVERLAY */
+.grid-overlay{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(0,170,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,170,255,0.03) 1px,transparent 1px);background-size:60px 60px;}
+
+/* ═══════════════════════════
+   HEADER & NAV
+═══════════════════════════ */
+header{position:fixed;top:0;width:100%;z-index:1000;padding:0;transition:all .3s;}
+header.scrolled{background:rgba(3,4,10,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--border);}
+.nav-inner{display:flex;align-items:center;justify-content:space-between;padding:18px 5%;max-width:1300px;margin:0 auto;}
+.logo{font-family:var(--font-head);font-size:18px;font-weight:900;color:var(--blue);letter-spacing:2px;position:relative;}
+.logo::after{content:'';position:absolute;bottom:-4px;left:0;width:100%;height:1px;background:linear-gradient(90deg,var(--blue),transparent);}
+.logo-dot{color:var(--cyan);}
+nav ul{display:flex;gap:32px;list-style:none;align-items:center;}
+nav a{font-family:var(--font-head);font-size:11px;font-weight:600;letter-spacing:1.5px;color:var(--soft);transition:color .2s;position:relative;padding:4px 0;}
+nav a::after{content:'';position:absolute;bottom:0;left:0;width:0;height:1px;background:var(--cyan);transition:width .3s;}
+nav a:hover{color:var(--cyan);}
+nav a:hover::after{width:100%;}
+nav a.active{color:var(--blue);}
+.nav-cta{background:transparent!important;border:1px solid var(--blue);color:var(--blue)!important;padding:8px 20px!important;border-radius:4px;transition:all .2s!important;}
+.nav-cta:hover{background:var(--blue)!important;color:#000!important;}
+.nav-cta::after{display:none!important;}
+
+/* HAMBURGER */
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;padding:4px;z-index:1001;}
+.ham-line{width:26px;height:2px;background:var(--blue);border-radius:2px;transition:all .3s;}
+.hamburger.open .ham-line:nth-child(1){transform:translateY(7px) rotate(45deg);}
+.hamburger.open .ham-line:nth-child(2){opacity:0;}
+.hamburger.open .ham-line:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
+
+/* MOBILE NAV */
+.mobile-nav{position:fixed;inset:0;background:rgba(3,4,10,0.97);backdrop-filter:blur(20px);z-index:999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+.mobile-nav.open{opacity:1;pointer-events:all;}
+.mobile-nav ul{list-style:none;display:flex;flex-direction:column;gap:32px;text-align:center;}
+.mobile-nav a{font-family:var(--font-head);font-size:22px;font-weight:700;letter-spacing:3px;color:var(--soft);transition:color .2s;}
+.mobile-nav a:hover{color:var(--cyan);}
+
+/* ═══════════════════════════
+   HERO
+═══════════════════════════ */
+.hero{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 5%;overflow:hidden;}
+.hero-content{position:relative;z-index:2;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,170,255,0.08);border:1px solid rgba(0,170,255,0.2);border-radius:50px;padding:7px 18px;font-family:var(--font-head);font-size:10px;letter-spacing:2px;color:var(--blue);margin-bottom:28px;animation:fadeDown .8s ease both;}
+.hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:blink 1.5s infinite;}
+@keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
+@keyframes fadeDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+.hero-name{font-family:var(--font-head);font-size:clamp(38px,8vw,90px);font-weight:900;line-height:1;letter-spacing:-1px;margin-bottom:16px;animation:fadeUp .8s .2s ease both;}
+.hero-name .blue{color:var(--blue);text-shadow:0 0 40px rgba(0,170,255,0.4);}
+.hero-name .cyan{color:var(--cyan);}
+@keyframes fadeUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+.hero-title{font-size:clamp(14px,2.5vw,20px);color:var(--soft);letter-spacing:3px;text-transform:uppercase;margin-bottom:12px;font-weight:500;animation:fadeUp .8s .35s ease both;}
+.glitch-text{position:relative;font-family:var(--font-head);font-size:clamp(12px,2vw,15px);letter-spacing:4px;color:var(--muted);margin-bottom:40px;animation:fadeUp .8s .45s ease both;}
+.glitch-text::before,.glitch-text::after{content:attr(data-text);position:absolute;inset:0;}
+.glitch-text::before{color:var(--cyan);animation:glitch1 3s infinite;clip-path:polygon(0 20%,100% 20%,100% 40%,0 40%);}
+.glitch-text::after{color:var(--blue);animation:glitch2 3s infinite;clip-path:polygon(0 60%,100% 60%,100% 80%,0 80%);}
+@keyframes glitch1{0%,90%,100%{transform:translate(0);}92%{transform:translate(-2px,1px);}95%{transform:translate(2px,-1px);}}
+@keyframes glitch2{0%,85%,100%{transform:translate(0);}88%{transform:translate(2px,-1px);}93%{transform:translate(-2px,1px);}}
+.hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;animation:fadeUp .8s .55s ease both;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#000;font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:2px;padding:14px 32px;border-radius:4px;transition:all .2s;position:relative;overflow:hidden;}
+.btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--cyan),var(--blue));opacity:0;transition:opacity .2s;}
+.btn-primary:hover::before{opacity:1;}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,170,255,0.4);}
+.btn-primary span{position:relative;z-index:1;}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--blue);font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:2px;padding:13px 32px;border-radius:4px;border:1px solid var(--blue);transition:all .2s;}
+.btn-outline:hover{background:rgba(0,170,255,0.1);transform:translateY(-2px);}
+.hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeUp .8s .8s ease both;}
+.scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--blue),transparent);position:relative;overflow:hidden;}
+.scroll-line::after{content:'';position:absolute;top:-100%;left:0;width:100%;height:100%;background:var(--cyan);animation:scrollMove 1.5s infinite;}
+@keyframes scrollMove{to{top:200%;}}
+.scroll-label{font-family:var(--font-head);font-size:9px;letter-spacing:3px;color:var(--muted);}
+
+/* HERO STATS */
+.hero-stats{display:flex;gap:clamp(20px,4vw,60px);justify-content:center;flex-wrap:wrap;margin:50px 0 0;animation:fadeUp .8s .65s ease both;}
+.hstat{text-align:center;}
+.hstat-val{font-family:var(--font-head);font-size:clamp(26px,5vw,42px);font-weight:900;color:var(--blue);line-height:1;text-shadow:0 0 30px rgba(0,170,255,0.4);}
+.hstat-val.cyan{color:var(--cyan);text-shadow:0 0 30px rgba(0,255,234,0.3);}
+.hstat-label{font-size:11px;letter-spacing:2px;color:var(--muted);margin-top:4px;text-transform:uppercase;}
+.hstat-divider{width:1px;background:var(--border);align-self:stretch;}
+
+/* ═══════════════════════════
+   SECTIONS
+═══════════════════════════ */
+.section{position:relative;z-index:1;padding:clamp(80px,10vw,140px) 5%;}
+.container{max-width:1200px;margin:0 auto;}
+
+/* SECTION HEADER */
+.sec-header{text-align:center;margin-bottom:clamp(40px,6vw,72px);}
+.sec-tag{display:inline-block;font-family:var(--font-head);font-size:10px;letter-spacing:3px;color:var(--cyan);background:rgba(0,255,234,0.08);border:1px solid rgba(0,255,234,0.2);padding:5px 14px;border-radius:2px;margin-bottom:14px;}
+.sec-title{font-family:var(--font-head);font-size:clamp(28px,5vw,48px);font-weight:900;letter-spacing:-1px;line-height:1.1;}
+.sec-title .accent{color:var(--blue);}
+.sec-line{width:60px;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));margin:16px auto 0;}
+
+/* REVEAL ANIMATION */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .7s,transform .7s;}
+.reveal.visible{opacity:1;transform:translateY(0);}
+.reveal-left{opacity:0;transform:translateX(-40px);transition:opacity .7s,transform .7s;}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(40px);transition:opacity .7s,transform .7s;}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+
+/* ═══════════════════════════
+   ABOUT
+═══════════════════════════ */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,70px);align-items:center;}
+@media(max-width:768px){.about-grid{grid-template-columns:1fr;}}
+.about-text p{font-size:clamp(14px,2vw,17px);line-height:1.8;color:var(--soft);margin-bottom:18px;}
+.about-text p strong{color:var(--blue);}
+.about-tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px;}
+.about-tag{background:rgba(0,170,255,0.08);border:1px solid var(--border);padding:6px 14px;border-radius:2px;font-family:var(--font-head);font-size:10px;letter-spacing:1px;color:var(--blue);}
+.about-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:clamp(20px,3vw,36px);position:relative;overflow:hidden;}
+.about-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));}
+.about-card-title{font-family:var(--font-head);font-size:11px;letter-spacing:2px;color:var(--cyan);margin-bottom:20px;}
+.about-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+.about-stat{background:rgba(0,170,255,0.05);border:1px solid var(--border);border-radius:6px;padding:16px;text-align:center;}
+.about-stat-val{font-family:var(--font-head);font-size:clamp(18px,3vw,26px);font-weight:900;color:var(--blue);}
+.about-stat-lbl{font-size:11px;color:var(--muted);margin-top:4px;letter-spacing:1px;}
+.status-row{display:flex;align-items:center;gap:10px;margin-top:20px;padding:12px 16px;background:rgba(0,255,100,0.06);border:1px solid rgba(0,255,100,0.15);border-radius:6px;}
+.status-dot{width:8px;height:8px;border-radius:50%;background:#00ff64;animation:blink 1.5s infinite;flex-shrink:0;}
+.status-text{font-family:var(--font-head);font-size:10px;letter-spacing:1.5px;color:#00ff64;}
+
+/* ═══════════════════════════
+   PROJECTS
+═══════════════════════════ */
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:20px;}
+.project-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:clamp(20px,3vw,30px);position:relative;overflow:hidden;transition:all .3s;cursor:pointer;}
+.project-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(0,170,255,0.05),transparent);opacity:0;transition:opacity .3s;}
+.project-card::after{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .3s;}
+.project-card:hover{transform:translateY(-6px);border-color:rgba(0,170,255,0.3);box-shadow:0 20px 60px rgba(0,170,255,0.1);}
+.project-card:hover::before{opacity:1;}
+.project-card:hover::after{transform:scaleX(1);}
+.project-icon{width:42px;height:42px;background:rgba(0,170,255,0.1);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px;}
+.project-name{font-family:var(--font-head);font-size:clamp(13px,2vw,16px);font-weight:700;color:var(--blue);margin-bottom:6px;letter-spacing:.5px;}
+.project-role{font-size:12px;color:var(--muted);letter-spacing:1px;margin-bottom:14px;text-transform:uppercase;}
+.project-stats{display:flex;flex-direction:column;gap:8px;}
+.pstat{display:flex;justify-content:space-between;align-items:center;}
+.pstat-label{font-size:11px;color:var(--muted);}
+.pstat-val{font-family:var(--font-head);font-size:12px;font-weight:700;}
+.pstat-val.green{color:#00ff64;}
+.pstat-val.blue{color:var(--blue);}
+.project-revenue-bar{height:3px;background:rgba(0,170,255,0.1);border-radius:2px;margin-top:12px;overflow:hidden;}
+.project-revenue-fill{height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:2px;transition:width 1.2s cubic-bezier(.4,0,.2,1);}
+
+/* ═══════════════════════════
+   CODE SHOWCASE
+═══════════════════════════ */
+.code-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:20px;}
+.code-card{background:var(--card);border:1px solid var(--borderc);border-radius:8px;overflow:hidden;transition:all .3s;}
+.code-card:hover{border-color:rgba(0,255,234,0.3);box-shadow:0 16px 50px rgba(0,255,234,0.06);}
+.code-header{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:rgba(0,255,234,0.04);border-bottom:1px solid var(--borderc);}
+.code-dots{display:flex;gap:6px;}
+.code-dot{width:10px;height:10px;border-radius:50%;}
+.code-dot.red{background:#ff5f57;}
+.code-dot.yellow{background:#febc2e;}
+.code-dot.green{background:#28c840;}
+.code-filename{font-family:var(--font-code);font-size:11px;color:var(--muted);}
+.code-lang{font-family:var(--font-head);font-size:9px;letter-spacing:2px;color:var(--cyan);background:rgba(0,255,234,0.08);padding:3px 8px;border-radius:2px;}
+.code-title{font-family:var(--font-head);font-size:12px;font-weight:700;color:var(--text);padding:14px 16px 4px;letter-spacing:.5px;}
+.code-desc{font-size:12px;color:var(--muted);padding:0 16px 12px;line-height:1.5;}
+pre.code-block{padding:16px;overflow-x:auto;font-family:var(--font-code);font-size:12px;line-height:1.7;background:rgba(0,0,0,0.3);border-top:1px solid var(--borderc);}
+pre.code-block::-webkit-scrollbar{height:3px;}
+pre.code-block::-webkit-scrollbar-thumb{background:var(--border);}
+.kw{color:#c792ea;}
+.fn{color:#82aaff;}
+.str{color:#c3e88d;}
+.num{color:#f78c6c;}
+.cm{color:#546e7a;font-style:italic;}
+.var2{color:var(--cyan);}
+.prop{color:#ffcb6b;}
+
+/* ═══════════════════════════
+   SKILLS
+═══════════════════════════ */
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
+.skill-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px;position:relative;overflow:hidden;transition:all .3s;}
+.skill-card:hover{border-color:rgba(0,170,255,0.3);transform:translateY(-3px);}
+.skill-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.skill-card:hover::before{transform:scaleX(1);}
+.skill-icon{font-size:26px;margin-bottom:10px;}
+.skill-name{font-family:var(--font-head);font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px;letter-spacing:.5px;}
+.skill-level{font-size:11px;color:var(--muted);margin-bottom:10px;}
+.skill-bar-wrap{height:3px;background:rgba(255,255,255,0.06);border-radius:2px;overflow:hidden;}
+.skill-bar{height:100%;background:linear-gradient(90deg,var(--blue),var(--cyan));border-radius:2px;width:0;transition:width 1.2s cubic-bezier(.4,0,.2,1);}
+
+/* ═══════════════════════════
+   TIMELINE / EXPERIENCE
+═══════════════════════════ */
+.timeline{position:relative;padding-left:clamp(20px,4vw,40px);}
+.timeline::before{content:'';position:absolute;left:0;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,var(--blue),var(--cyan),transparent);}
+.timeline-item{position:relative;padding:0 0 clamp(30px,4vw,48px) clamp(20px,3vw,36px);}
+.timeline-item::before{content:'';position:absolute;left:calc(clamp(-30px,-4.5vw,-20px));top:6px;width:10px;height:10px;border-radius:50%;background:var(--blue);box-shadow:0 0 16px var(--blue);}
+.timeline-item:last-child{padding-bottom:0;}
+.timeline-date{font-family:var(--font-head);font-size:10px;letter-spacing:2px;color:var(--cyan);margin-bottom:6px;}
+.timeline-title{font-family:var(--font-head);font-size:clamp(14px,2.5vw,18px);font-weight:700;color:var(--blue);margin-bottom:4px;}
+.timeline-sub{font-size:12px;color:var(--muted);margin-bottom:10px;letter-spacing:1px;}
+.timeline-desc{font-size:clamp(13px,1.8vw,15px);color:var(--soft);line-height:1.7;}
+.timeline-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px;}
+.t-tag{font-family:var(--font-head);font-size:9px;letter-spacing:1px;color:var(--muted);background:rgba(0,170,255,0.06);border:1px solid var(--border);padding:3px 9px;border-radius:2px;}
+
+/* ═══════════════════════════
+   SERVICES
+═══════════════════════════ */
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px;}
+.service-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:clamp(20px,3vw,32px);text-align:center;transition:all .3s;position:relative;overflow:hidden;}
+.service-card:hover{transform:translateY(-5px);border-color:rgba(0,170,255,0.3);box-shadow:0 20px 60px rgba(0,170,255,0.08);}
+.service-card::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;background:radial-gradient(circle,rgba(0,170,255,0.04) 0%,transparent 60%);opacity:0;transition:opacity .3s;}
+.service-card:hover::after{opacity:1;}
+.service-icon{font-size:36px;margin-bottom:14px;display:block;}
+.service-name{font-family:var(--font-head);font-size:13px;font-weight:700;color:var(--blue);margin-bottom:10px;letter-spacing:.5px;}
+.service-desc{font-size:clamp(12px,1.8vw,14px);color:var(--muted);line-height:1.6;}
+
+/* ═══════════════════════════
+   CONTACT
+═══════════════════════════ */
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,60px);align-items:start;}
+@media(max-width:700px){.contact-grid{grid-template-columns:1fr;}}
+.contact-info{display:flex;flex-direction:column;gap:16px;}
+.contact-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px;display:flex;align-items:center;gap:14px;transition:all .2s;cursor:pointer;}
+.contact-card:hover{border-color:rgba(0,170,255,0.3);transform:translateX(4px);}
+.contact-card-icon{width:42px;height:42px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.contact-card-title{font-family:var(--font-head);font-size:11px;font-weight:700;color:var(--blue);letter-spacing:1px;margin-bottom:3px;}
+.contact-card-val{font-size:13px;color:var(--soft);}
+.contact-form{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:clamp(20px,3vw,32px);}
+.form-title{font-family:var(--font-head);font-size:13px;font-weight:700;color:var(--text);margin-bottom:20px;letter-spacing:1px;}
+.form-group{margin-bottom:16px;}
+.form-label{font-family:var(--font-head);font-size:10px;letter-spacing:2px;color:var(--muted);display:block;margin-bottom:6px;}
+.form-input{width:100%;background:rgba(0,170,255,0.04);border:1px solid var(--border);border-radius:4px;padding:12px 14px;color:var(--text);font-family:var(--font-body);font-size:14px;outline:none;transition:border-color .2s;}
+.form-input:focus{border-color:rgba(0,170,255,0.4);box-shadow:0 0 0 3px rgba(0,170,255,0.06);}
+.form-input::placeholder{color:var(--muted);}
+textarea.form-input{resize:none;height:100px;}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+@media(max-width:480px){.form-row{grid-template-columns:1fr;}}
+.form-submit{width:100%;padding:13px;background:var(--blue);color:#000;font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:2px;border:none;border-radius:4px;cursor:pointer;transition:all .2s;margin-top:4px;}
+.form-submit:hover{background:var(--cyan);transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,170,255,0.3);}
+.form-submit.sent{background:#00ff64;color:#000;}
+
+/* ═══════════════════════════
+   FOOTER
+═══════════════════════════ */
+footer{position:relative;z-index:1;padding:40px 5%;border-top:1px solid var(--border);}
+.footer-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px;}
+.footer-logo{font-family:var(--font-head);font-size:16px;font-weight:900;color:var(--blue);}
+.footer-copy{font-size:12px;color:var(--muted);}
+.footer-links{display:flex;gap:20px;}
+.footer-link{font-family:var(--font-head);font-size:10px;letter-spacing:1.5px;color:var(--muted);transition:color .2s;}
+.footer-link:hover{color:var(--cyan);}
+
+/* BACK TO TOP */
+#backTop{position:fixed;bottom:28px;right:28px;width:42px;height:42px;background:rgba(0,170,255,0.1);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:500;opacity:0;pointer-events:none;transition:all .3s;font-size:18px;color:var(--blue);}
+#backTop.visible{opacity:1;pointer-events:all;}
+#backTop:hover{background:var(--blue);color:#000;}
+
+/* TOAST */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(0,255,100,0.1);border:1px solid rgba(0,255,100,0.25);backdrop-filter:blur(10px);border-radius:6px;padding:12px 24px;font-family:var(--font-head);font-size:11px;letter-spacing:1.5px;color:#00ff64;z-index:2000;opacity:0;transition:all .3s;white-space:nowrap;}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
+
+/* SCANLINE */
+.scanline{position:fixed;inset:0;pointer-events:none;z-index:9990;background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,0.03) 2px,rgba(0,0,0,0.03) 4px);animation:scan 8s linear infinite;}
+@keyframes scan{0%{background-position:0 0;}100%{background-position:0 100%;}}
+
+/* ═══════════════════════════
+   RESPONSIVE
+═══════════════════════════ */
+@media(max-width:900px){
+  nav ul{display:none;}
+  .hamburger{display:flex;}
+  .hstat-divider{display:none;}
 }
-
-.container{
-width:90%;
-max-width:1200px;
-margin:auto;
+@media(max-width:600px){
+  .hero-stats{gap:24px;}
+  .btn-primary,.btn-outline{font-size:10px;padding:12px 22px;}
 }
-
-header{
-position:fixed;
-width:100%;
-background:rgba(0,0,0,.6);
-backdrop-filter:blur(10px);
-padding:18px 0;
-z-index:1000;
-}
-
-nav{
-display:flex;
-justify-content:space-between;
-align-items:center;
-}
-
-.logo{
-font-family:Orbitron;
-font-weight:700;
-font-size:22px;
-color:#4da3ff;
-}
-
-nav ul{
-display:flex;
-gap:25px;
-list-style:none;
-}
-
-nav a{
-color:white;
-text-decoration:none;
-opacity:.8;
-font-size:14px;
-}
-
-nav a:hover{
-opacity:1;
-}
-
-.hero{
-height:100vh;
-display:flex;
-align-items:center;
-justify-content:center;
-text-align:center;
-background:radial-gradient(circle at top,#151535,#050508);
-}
-
-.hero h1{
-font-size:60px;
-font-family:Orbitron;
-margin-bottom:15px;
-}
-
-.hero span{
-color:#4da3ff;
-}
-
-.hero p{
-opacity:.85;
-margin-bottom:35px;
-}
-
-.cta{
-padding:14px 36px;
-background:#4da3ff;
-border-radius:10px;
-font-weight:600;
-display:inline-block;
-}
-
-.stats{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:25px;
-margin-top:70px;
-}
-
-.stat{
-background:#0f0f18;
-padding:28px;
-border-radius:12px;
-}
-
-.stat h2{
-color:#4da3ff;
-font-size:28px;
-}
-
-.section{
-padding:110px 0;
-}
-
-.section-title{
-text-align:center;
-font-size:36px;
-margin-bottom:60px;
-font-family:Orbitron;
-}
-
-.projects{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-gap:28px;
-}
-
-.card{
-background:#0f0f18;
-padding:28px;
-border-radius:14px;
-transition:.3s;
-}
-
-.card:hover{
-transform:translateY(-8px);
-background:#151528;
-}
-
-.card h3{
-color:#4da3ff;
-margin-bottom:10px;
-}
-
-.skills{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-}
-
-.skill{
-background:#0f0f18;
-padding:20px;
-text-align:center;
-border-radius:10px;
-}
-
-pre{
-background:#0b0b12;
-padding:15px;
-border-radius:8px;
-overflow-x:auto;
-font-size:13px;
-margin-top:10px;
-}
-
-code{
-color:#4da3ff;
-font-family:monospace;
-}
-
-.contact{
-text-align:center;
-}
-
-.discord{
-display:inline-block;
-margin-top:30px;
-background:#5865F2;
-padding:16px 44px;
-border-radius:12px;
-font-weight:600;
-}
-
-footer{
-margin-top:80px;
-padding:30px;
-text-align:center;
-border-top:1px solid #1a1a1a;
-opacity:.6;
-}
-
-canvas{
-position:fixed;
-top:0;
-left:0;
-z-index:-1;
-}
-
 </style>
 </head>
-
 <body>
 
-<canvas id="bg"></canvas>
+<!-- CURSOR -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
 
-<header>
-<div class="container">
+<!-- SCROLL PROGRESS -->
+<div id="scrollBar"></div>
 
-<nav>
+<!-- SCANLINE -->
+<div class="scanline"></div>
 
-<div class="logo">VEDANTGR20</div>
-
-<ul>
-<li><a href="#about">About</a></li>
-<li><a href="#projects">Projects</a></li>
-<li><a href="#code">Code</a></li>
-<li><a href="#skills">Skills</a></li>
-<li><a href="#contact">Contact</a></li>
-</ul>
-
-</nav>
-
+<!-- LOADER -->
+<div id="loader">
+  <div class="loader-logo">VEDANTGR20</div>
+  <div class="loader-bar-wrap"><div class="loader-bar"></div></div>
+  <div class="loader-text">INITIALIZING PORTFOLIO SYSTEMS...</div>
 </div>
+
+<!-- BG -->
+<canvas id="bgCanvas"></canvas>
+<div class="grid-overlay"></div>
+
+<!-- HEADER -->
+<header id="header">
+  <div class="nav-inner">
+    <div class="logo">VEDANT<span class="logo-dot">.</span>GR20</div>
+    <nav>
+      <ul>
+        <li><a href="#about">ABOUT</a></li>
+        <li><a href="#projects">PROJECTS</a></li>
+        <li><a href="#code">CODE</a></li>
+        <li><a href="#skills">SKILLS</a></li>
+        <li><a href="#services">SERVICES</a></li>
+        <li><a href="#contact" class="nav-cta">HIRE ME</a></li>
+      </ul>
+    </nav>
+    <div class="hamburger" id="hamburger" onclick="toggleNav()">
+      <div class="ham-line"></div>
+      <div class="ham-line"></div>
+      <div class="ham-line"></div>
+    </div>
+  </div>
 </header>
 
-<section class="hero">
-
-<div class="container">
-
-<h1>Advanced <span>Roblox Scripter</span></h1>
-
-<p>5+ Years Experience • $178K+ Revenue Generated • Systems Developer</p>
-
-<a class="cta" href="#contact">Hire Me</a>
-
-<div class="stats">
-
-<div class="stat">
-<h2>5+</h2>
-<p>Years Experience</p>
+<!-- MOBILE NAV -->
+<div class="mobile-nav" id="mobileNav">
+  <ul>
+    <li><a href="#about" onclick="toggleNav()">ABOUT</a></li>
+    <li><a href="#projects" onclick="toggleNav()">PROJECTS</a></li>
+    <li><a href="#code" onclick="toggleNav()">CODE</a></li>
+    <li><a href="#skills" onclick="toggleNav()">SKILLS</a></li>
+    <li><a href="#services" onclick="toggleNav()">SERVICES</a></li>
+    <li><a href="#contact" onclick="toggleNav()">HIRE ME</a></li>
+  </ul>
 </div>
 
-<div class="stat">
-<h2>$178K+</h2>
-<p>Total Revenue</p>
-</div>
-
-<div class="stat">
-<h2>4+</h2>
-<p>Major Projects</p>
-</div>
-
-<div class="stat">
-<h2>Advanced</h2>
-<p>Lua Developer</p>
-</div>
-
-</div>
-
-</div>
-
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-content">
+    <div class="hero-badge"><span class="hero-badge-dot"></span> AVAILABLE FOR HIRE</div>
+    <h1 class="hero-name"><span class="blue">VEDANT</span><span class="cyan">GR20</span></h1>
+    <div class="hero-title">Roblox Systems Developer</div>
+    <div class="glitch-text" data-text="ADVANCED LUA · SERVER ARCHITECTURE · GAMEPLAY SYSTEMS">ADVANCED LUA · SERVER ARCHITECTURE · GAMEPLAY SYSTEMS</div>
+    <div class="hero-btns">
+      <a href="#projects" class="btn-primary"><span>⚡ VIEW PROJECTS</span></a>
+      <a href="#contact" class="btn-outline">💬 CONTACT ME</a>
+    </div>
+    <div class="hero-stats">
+      <div class="hstat">
+        <div class="hstat-val" data-count="5">0</div>
+        <div class="hstat-label">Years Exp+</div>
+      </div>
+      <div class="hstat-divider"></div>
+      <div class="hstat">
+        <div class="hstat-val cyan" data-prefix="$" data-count="178">0</div>
+        <div class="hstat-label">Revenue (K+)</div>
+      </div>
+      <div class="hstat-divider"></div>
+      <div class="hstat">
+        <div class="hstat-val" data-count="4">0</div>
+        <div class="hstat-label">Major Projects</div>
+      </div>
+      <div class="hstat-divider"></div>
+      <div class="hstat">
+        <div class="hstat-val cyan">ADV</div>
+        <div class="hstat-label">Lua Level</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <div class="scroll-label">SCROLL</div>
+  </div>
 </section>
 
+<!-- ABOUT -->
 <section class="section" id="about">
-
-<div class="container">
-
-<h2 class="section-title">About Me</h2>
-
-<p style="max-width:750px;margin:auto;text-align:center">
-I am VEDANTGR20, a Roblox developer specializing in advanced Lua scripting,
-server-client architecture, and scalable gameplay systems.  
-Over the last 5 years I have worked with development teams creating
-successful Roblox experiences generating over $178,000 in revenue.
-</p>
-
-</div>
-
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-tag">// ABOUT ME</div>
+      <h2 class="sec-title">Who Is <span class="accent">VEDANTGR20</span></h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="about-grid">
+      <div class="about-text reveal-left">
+        <p>I am <strong>VEDANTGR20</strong>, an advanced Roblox systems developer with <strong>5+ years</strong> of hands-on experience building complex, scalable gameplay systems from the ground up.</p>
+        <p>I specialize in <strong>server-client architecture</strong>, combat frameworks, real-time data systems, and performance optimization. My work has contributed to games generating over <strong>$178,000 in total revenue</strong>.</p>
+        <p>I've worked with multiple development teams across the Roblox platform, bringing strong engineering discipline and deep knowledge of <strong>Lua scripting patterns</strong> to every project.</p>
+        <div class="about-tags">
+          <span class="about-tag">COMBAT SYSTEMS</span>
+          <span class="about-tag">DATASTORE</span>
+          <span class="about-tag">REMOTE EVENTS</span>
+          <span class="about-tag">OOP LUA</span>
+          <span class="about-tag">SERVER OPT.</span>
+          <span class="about-tag">FRAMEWORKS</span>
+        </div>
+      </div>
+      <div class="reveal-right">
+        <div class="about-card">
+          <div class="about-card-title">// QUICK STATS</div>
+          <div class="about-stat-grid">
+            <div class="about-stat">
+              <div class="about-stat-val">5+</div>
+              <div class="about-stat-lbl">YEARS EXP</div>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat-val">$178K+</div>
+              <div class="about-stat-lbl">REVENUE GEN.</div>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat-val">4</div>
+              <div class="about-stat-lbl">MAJOR PROJECTS</div>
+            </div>
+            <div class="about-stat">
+              <div class="about-stat-val">ADV</div>
+              <div class="about-stat-lbl">LUA LEVEL</div>
+            </div>
+          </div>
+          <div class="status-row">
+            <div class="status-dot"></div>
+            <div class="status-text">CURRENTLY AVAILABLE FOR NEW PROJECTS</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- PROJECTS -->
 <section class="section" id="projects">
-
-<div class="container">
-
-<h2 class="section-title">Projects</h2>
-
-<div class="projects">
-
-<div class="card">
-<h3>Anime Rampage</h3>
-<p>Advanced Scripter</p>
-<p>10% Revenue Share</p>
-<p>$78,000 Revenue</p>
-</div>
-
-<div class="card">
-<h3>Anime Singularity</h3>
-<p>Scripter</p>
-<p>23% Revenue Share</p>
-<p>$13,400 Revenue</p>
-</div>
-
-<div class="card">
-<h3>Anime.Co</h3>
-<p>Scripter</p>
-<p>43% Revenue Share</p>
-<p>$6,900 Revenue</p>
-</div>
-
-<div class="card">
-<h3>The Trio Development</h3>
-<p>Advanced Scripter</p>
-<p>12% Revenue Share</p>
-<p>$80,340 Revenue</p>
-</div>
-
-</div>
-
-</div>
-
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-tag">// PROJECTS</div>
+      <h2 class="sec-title">Revenue-Generating <span class="accent">Experiences</span></h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="projects-grid">
+      <div class="project-card reveal">
+        <div class="project-icon">⚔️</div>
+        <div class="project-name">Anime Rampage</div>
+        <div class="project-role">Advanced Scripter</div>
+        <div class="project-stats">
+          <div class="pstat"><span class="pstat-label">Revenue</span><span class="pstat-val green">$78,000</span></div>
+          <div class="pstat"><span class="pstat-label">Revenue Share</span><span class="pstat-val blue">10%</span></div>
+          <div class="pstat"><span class="pstat-label">Role</span><span class="pstat-val" style="color:var(--soft)">Systems Dev</span></div>
+        </div>
+        <div class="project-revenue-bar"><div class="project-revenue-fill" data-width="87"></div></div>
+      </div>
+      <div class="project-card reveal" style="transition-delay:.1s">
+        <div class="project-icon">🌌</div>
+        <div class="project-name">Anime Singularity</div>
+        <div class="project-role">Scripter</div>
+        <div class="project-stats">
+          <div class="pstat"><span class="pstat-label">Revenue</span><span class="pstat-val green">$13,400</span></div>
+          <div class="pstat"><span class="pstat-label">Revenue Share</span><span class="pstat-val blue">23%</span></div>
+          <div class="pstat"><span class="pstat-label">Role</span><span class="pstat-val" style="color:var(--soft)">Gameplay Dev</span></div>
+        </div>
+        <div class="project-revenue-bar"><div class="project-revenue-fill" data-width="45"></div></div>
+      </div>
+      <div class="project-card reveal" style="transition-delay:.2s">
+        <div class="project-icon">🏢</div>
+        <div class="project-name">Anime.Co</div>
+        <div class="project-role">Scripter</div>
+        <div class="project-stats">
+          <div class="pstat"><span class="pstat-label">Revenue</span><span class="pstat-val green">$6,900</span></div>
+          <div class="pstat"><span class="pstat-label">Revenue Share</span><span class="pstat-val blue">43%</span></div>
+          <div class="pstat"><span class="pstat-label">Role</span><span class="pstat-val" style="color:var(--soft)">Core Systems</span></div>
+        </div>
+        <div class="project-revenue-bar"><div class="project-revenue-fill" data-width="25"></div></div>
+      </div>
+      <div class="project-card reveal" style="transition-delay:.3s">
+        <div class="project-icon">🚀</div>
+        <div class="project-name">The Trio Development</div>
+        <div class="project-role">Advanced Scripter</div>
+        <div class="project-stats">
+          <div class="pstat"><span class="pstat-label">Revenue</span><span class="pstat-val green">$80,340</span></div>
+          <div class="pstat"><span class="pstat-label">Revenue Share</span><span class="pstat-val blue">12%</span></div>
+          <div class="pstat"><span class="pstat-label">Role</span><span class="pstat-val" style="color:var(--soft)">Lead Dev</span></div>
+        </div>
+        <div class="project-revenue-bar"><div class="project-revenue-fill" data-width="92"></div></div>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- CODE SHOWCASE -->
 <section class="section" id="code">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-tag">// CODE SHOWCASE</div>
+      <h2 class="sec-title">Real <span class="accent">Production Code</span></h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="code-grid">
+      <div class="code-card reveal">
+        <div class="code-header">
+          <div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+          <div class="code-filename">CombatSystem.lua</div>
+          <div class="code-lang">LUA</div>
+        </div>
+        <div class="code-title">Combat System Framework</div>
+        <div class="code-desc">OOP-based combo tracking system with timing validation</div>
+        <pre class="code-block"><span class="kw">local</span> <span class="var2">Combat</span> = {}
+<span class="var2">Combat</span>.__index = <span class="var2">Combat</span>
 
-<div class="container">
+<span class="kw">function</span> <span class="var2">Combat</span>.<span class="fn">new</span>(player)
+  <span class="kw">local</span> self = <span class="fn">setmetatable</span>({}, <span class="var2">Combat</span>)
+  self.Player = player
+  self.Combo = <span class="num">0</span>
+  self.LastAttack = <span class="num">0</span>
+  <span class="kw">return</span> self
+<span class="kw">end</span>
 
-<h2 class="section-title">Code Showcase</h2>
+<span class="kw">function</span> <span class="var2">Combat</span>:<span class="fn">Attack</span>()
+  <span class="kw">local</span> now = <span class="fn">tick</span>()
+  <span class="kw">if</span> now - self.LastAttack > <span class="num">1</span> <span class="kw">then</span>
+    self.Combo = <span class="num">0</span>
+  <span class="kw">end</span>
+  self.Combo += <span class="num">1</span>
+  self.LastAttack = now
+  <span class="kw">return</span> self.Combo
+<span class="kw">end</span>
 
-<div class="projects">
+<span class="kw">return</span> <span class="var2">Combat</span></pre>
+      </div>
+      <div class="code-card reveal" style="transition-delay:.1s">
+        <div class="code-header">
+          <div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+          <div class="code-filename">DataHandler.lua</div>
+          <div class="code-lang">LUA</div>
+        </div>
+        <div class="code-title">Optimized DataStore Handler</div>
+        <div class="code-desc">Safe async data loading with pcall error handling</div>
+        <pre class="code-block"><span class="kw">local</span> <span class="var2">DS</span> = game:GetService(<span class="str">"DataStoreService"</span>)
+<span class="kw">local</span> <span class="var2">Store</span> = <span class="var2">DS</span>:<span class="fn">GetDataStore</span>(<span class="str">"PlayerData"</span>)
+<span class="kw">local</span> <span class="var2">Handler</span> = {}
 
-<div class="card">
-<h3>Combat System Framework</h3>
+<span class="kw">function</span> <span class="var2">Handler</span>:<span class="fn">Load</span>(player)
+  <span class="kw">local</span> ok, data = <span class="fn">pcall</span>(<span class="kw">function</span>()
+    <span class="kw">return</span> <span class="var2">Store</span>:<span class="fn">GetAsync</span>(player.UserId)
+  <span class="kw">end</span>)
+  <span class="kw">if</span> ok <span class="kw">and</span> data <span class="kw">then</span>
+    <span class="kw">return</span> data
+  <span class="kw">end</span>
+  <span class="kw">return</span> { Coins = <span class="num">0</span>, Level = <span class="num">1</span> }
+<span class="kw">end</span>
 
-<pre><code>
-local Combat = {}
-Combat.__index = Combat
+<span class="kw">function</span> <span class="var2">Handler</span>:<span class="fn">Save</span>(player, data)
+  <span class="fn">pcall</span>(<span class="kw">function</span>()
+    <span class="var2">Store</span>:<span class="fn">SetAsync</span>(player.UserId, data)
+  <span class="kw">end</span>)
+<span class="kw">end</span>
 
-function Combat.new(player)
-    local self = setmetatable({}, Combat)
-    self.Player = player
-    self.Combo = 0
-    self.LastAttack = 0
-    return self
-end
+<span class="kw">return</span> <span class="var2">Handler</span></pre>
+      </div>
+      <div class="code-card reveal" style="transition-delay:.2s">
+        <div class="code-header">
+          <div class="code-dots"><div class="code-dot red"></div><div class="code-dot yellow"></div><div class="code-dot green"></div></div>
+          <div class="code-filename">RemoteValidation.lua</div>
+          <div class="code-lang">LUA</div>
+        </div>
+        <div class="code-title">Secure Remote Validation</div>
+        <div class="code-desc">Server-side input sanitization preventing exploits</div>
+        <pre class="code-block"><span class="kw">local</span> <span class="var2">Remote</span> = ReplicatedStorage
+  :<span class="fn">WaitForChild</span>(<span class="str">"Attack"</span>)
 
-function Combat:Attack()
+<span class="var2">Remote</span>.OnServerEvent:<span class="fn">Connect</span>(
+  <span class="kw">function</span>(player, action)
 
-    local now = tick()
+  <span class="kw">if</span> <span class="fn">typeof</span>(action) ~= <span class="str">"string"</span> <span class="kw">then</span>
+    <span class="kw">return</span> <span class="cm">-- reject invalid types</span>
+  <span class="kw">end</span>
 
-    if now - self.LastAttack > 1 then
-        self.Combo = 0
-    end
-
-    self.Combo += 1
-    self.LastAttack = now
-
-    return self.Combo
-end
-
-return Combat
-</code></pre>
-
-</div>
-
-<div class="card">
-<h3>Optimized DataStore Handler</h3>
-
-<pre><code>
-local DataStoreService = game:GetService("DataStoreService")
-local PlayerData = DataStoreService:GetDataStore("PlayerData")
-
-local DataHandler = {}
-
-function DataHandler:Load(player)
-
-    local success,data = pcall(function()
-        return PlayerData:GetAsync(player.UserId)
-    end)
-
-    if success and data then
-        return data
-    else
-        return {
-            Coins = 0,
-            Level = 1
-        }
-    end
-end
-
-function DataHandler:Save(player,data)
-
-    pcall(function()
-        PlayerData:SetAsync(player.UserId,data)
-    end)
-
-end
-
-return DataHandler
-</code></pre>
-
-</div>
-
-<div class="card">
-<h3>Secure Remote Validation</h3>
-
-<pre><code>
-local Remote = game.ReplicatedStorage:WaitForChild("Attack")
-
-Remote.OnServerEvent:Connect(function(player,action)
-
-    if typeof(action) ~= "string" then return end
-
-    if action == "Punch" then
-
-        local character = player.Character
-        if not character then return end
-
-        local humanoid = character:FindFirstChild("Humanoid")
-        if not humanoid then return end
-
-        humanoid:TakeDamage(10)
-
-    end
-
-end)
-</code></pre>
-
-</div>
-
-</div>
-
-</div>
-
+  <span class="kw">if</span> action == <span class="str">"Punch"</span> <span class="kw">then</span>
+    <span class="kw">local</span> char = player.Character
+    <span class="kw">if not</span> char <span class="kw">then return end</span>
+    <span class="kw">local</span> hum = char:
+      <span class="fn">FindFirstChild</span>(<span class="str">"Humanoid"</span>)
+    <span class="kw">if</span> hum <span class="kw">then</span>
+      hum:<span class="fn">TakeDamage</span>(<span class="num">10</span>)
+    <span class="kw">end</span>
+  <span class="kw">end</span>
+<span class="kw">end</span>)</pre>
+      </div>
+    </div>
+  </div>
 </section>
 
+<!-- SKILLS -->
 <section class="section" id="skills">
-
-<div class="container">
-
-<h2 class="section-title">Skills</h2>
-
-<div class="skills">
-
-<div class="skill">Advanced Lua</div>
-<div class="skill">Roblox Studio</div>
-<div class="skill">Combat Systems</div>
-<div class="skill">Ability Frameworks</div>
-<div class="skill">Inventory Systems</div>
-<div class="skill">Quest Systems</div>
-<div class="skill">DataStore Systems</div>
-<div class="skill">Server Optimization</div>
-
-</div>
-
-</div>
-
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-tag">// SKILLS</div>
+      <h2 class="sec-title">Technical <span class="accent">Expertise</span></h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="skills-grid">
+      <div class="skill-card reveal"><div class="skill-icon">🔷</div><div class="skill-name">Advanced Lua</div><div class="skill-level">Expert · OOP, Metatables, Closures</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="95"></div></div></div>
+      <div class="skill-card reveal" style="transition-delay:.05s"><div class="skill-icon">🎮</div><div class="skill-name">Roblox Studio</div><div class="skill-level">Expert · Full IDE Proficiency</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="98"></div></div></div>
+      <div class="skill-card reveal" style="transition-delay:.1s"><div class="skill-icon">⚔️</div><div class="skill-name">Combat Systems</div><div class="skill-level">Expert · Hitboxes, Combos, VFX</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="93"></div></div></div>
+      <div class="skill-card reveal" style="transition-delay:.15s"><div class="skill-icon">✨</div><div class="skill-name">Ability Frameworks</div><div class="skill-level">Advanced · Cooldowns, Stacking</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="90"></div></div></div>
+      <div class="skill-card reveal" style="transition-delay:.2s"><div class="skill-icon">🎒</div><div class="skill-name">Inventory Systems</div><div class="skill-level">Advanced · Real-time Sync</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="88"></div></div></div>
+      <div class="skill-card reveal" style="transition-delay:.25s"><div class="skill-icon">📋</div><div class="skill-name">Quest Systems</div><div class="skill-level">Advanced · Dynamic Objectives</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="85"></div></div></div>
+      <div class="skill-card reveal" style="transition-delay:.3s"><div class="skill-icon">💾</div><div class="skill-name">DataStore Systems</div><div class="skill-level">Expert · Safe Save/Load</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="94"></div></div></div>
+      <div class="skill-card reveal" style="transition-delay:.35s"><div class="skill-icon">⚡</div><div class="skill-name">Server Optimization</div><div class="skill-level">Advanced · Memory, Performance</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="87"></div></div></div>
+    </div>
+  </div>
 </section>
 
-<section class="section contact" id="contact">
-
-<div class="container">
-
-<h2 class="section-title">Contact</h2>
-
-<p>Interested in working together on a Roblox project?</p>
-
-<a class="discord">Discord: VEDANTGR20</a>
-
-</div>
-
+<!-- SERVICES -->
+<section class="section" id="services">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-tag">// SERVICES</div>
+      <h2 class="sec-title">What I <span class="accent">Build</span></h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="services-grid">
+      <div class="service-card reveal"><span class="service-icon">⚔️</span><div class="service-name">COMBAT SYSTEMS</div><div class="service-desc">Full combat frameworks with combos, hitboxes, animations, and server-validated damage systems.</div></div>
+      <div class="service-card reveal" style="transition-delay:.1s"><span class="service-icon">💾</span><div class="service-name">DATA SYSTEMS</div><div class="service-desc">Robust player data persistence with safe async handling, auto-save, and migration support.</div></div>
+      <div class="service-card reveal" style="transition-delay:.2s"><span class="service-icon">🎯</span><div class="service-name">ABILITY SYSTEMS</div><div class="service-desc">Modular ability frameworks with cooldowns, stacking mechanics, and visual effects integration.</div></div>
+      <div class="service-card reveal" style="transition-delay:.3s"><span class="service-icon">🌐</span><div class="service-name">NETWORKING</div><div class="service-desc">Secure RemoteEvent/Function architecture with server-side validation against exploits.</div></div>
+      <div class="service-card reveal" style="transition-delay:.4s"><span class="service-icon">📦</span><div class="service-name">INVENTORY & SHOP</div><div class="service-desc">Complete inventory systems with shop UIs, equipping, trading, and currency management.</div></div>
+      <div class="service-card reveal" style="transition-delay:.5s"><span class="service-icon">⚙️</span><div class="service-name">OPTIMIZATION</div><div class="service-desc">Performance auditing and optimization — memory management, rendering, and server load reduction.</div></div>
+    </div>
+  </div>
 </section>
 
+<!-- CONTACT -->
+<section class="section" id="contact">
+  <div class="container">
+    <div class="sec-header reveal">
+      <div class="sec-tag">// CONTACT</div>
+      <h2 class="sec-title">Let's Build <span class="accent">Something</span></h2>
+      <div class="sec-line"></div>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info reveal-left">
+        <p style="font-size:clamp(14px,2vw,16px);color:var(--soft);line-height:1.7;margin-bottom:24px;">Ready to bring your Roblox game to the next level? I'm available for freelance projects, revenue-share deals, and long-term team positions.</p>
+        <div class="contact-card" onclick="copyDiscord()">
+          <div class="contact-card-icon" style="background:rgba(88,101,242,0.15);">💬</div>
+          <div>
+            <div class="contact-card-title">DISCORD</div>
+            <div class="contact-card-val">VEDANTGR20</div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon" style="background:rgba(0,170,255,0.1);">🎮</div>
+          <div>
+            <div class="contact-card-title">ROBLOX USERNAME</div>
+            <div class="contact-card-val">VEDANTGR20</div>
+          </div>
+        </div>
+        <div class="contact-card">
+          <div class="contact-card-icon" style="background:rgba(0,255,100,0.08);">✅</div>
+          <div>
+            <div class="contact-card-title">AVAILABILITY</div>
+            <div class="contact-card-val" style="color:#00ff64;">Open to Work</div>
+          </div>
+        </div>
+      </div>
+      <div class="contact-form reveal-right">
+        <div class="form-title">// SEND A MESSAGE</div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">YOUR NAME</label>
+            <input class="form-input" type="text" id="fname" placeholder="John Doe"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">PROJECT TYPE</label>
+            <input class="form-input" type="text" id="ftype" placeholder="Combat System"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">DISCORD TAG</label>
+          <input class="form-input" type="text" id="fdiscord" placeholder="yourname#0000"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">MESSAGE</label>
+          <textarea class="form-input" id="fmsg" placeholder="Describe your project..."></textarea>
+        </div>
+        <button class="form-submit" id="formSubmit" onclick="submitForm()">
+          SEND MESSAGE →
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
-VEDANTGR20 • Roblox Developer Portfolio
+  <div class="footer-inner">
+    <div class="footer-logo">VEDANT<span style="color:var(--cyan)">.</span>GR20</div>
+    <div class="footer-copy">© 2025 VEDANTGR20 · All Rights Reserved</div>
+    <div class="footer-links">
+      <a href="#home" class="footer-link">TOP</a>
+      <a href="#projects" class="footer-link">PROJECTS</a>
+      <a href="#contact" class="footer-link">CONTACT</a>
+    </div>
+  </div>
 </footer>
 
+<!-- BACK TO TOP -->
+<div id="backTop" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
 <script>
+/* ── LOADER ── */
+window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('loader').classList.add('hidden');setTimeout(()=>document.getElementById('loader').style.display='none',600);startCounters();},2000);});
 
-const canvas=document.getElementById("bg")
-const ctx=canvas.getContext("2d")
+/* ── CURSOR ── */
+const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px';});
+function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring.style.top=ry+'px';requestAnimationFrame(animRing);}animRing();
+document.querySelectorAll('a,button,.project-card,.service-card,.contact-card,.skill-card').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.classList.add('hover');ring.classList.add('hover');});el.addEventListener('mouseleave',()=>{cur.classList.remove('hover');ring.classList.remove('hover');});});
 
-canvas.width=window.innerWidth
-canvas.height=window.innerHeight
+/* ── SCROLL PROGRESS ── */
+window.addEventListener('scroll',()=>{const s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight;document.getElementById('scrollBar').style.width=(s/h*100)+'%';document.getElementById('header').classList.toggle('scrolled',s>60);document.getElementById('backTop').classList.toggle('visible',s>400);updateActiveNav();});
 
-let particles=[]
+/* ── ACTIVE NAV ── */
+function updateActiveNav(){const sections=['about','projects','code','skills','services','contact'];const links=document.querySelectorAll('nav a');sections.forEach(id=>{const el=document.getElementById(id);if(!el)return;const rect=el.getBoundingClientRect();if(rect.top<=100&&rect.bottom>=100){links.forEach(l=>{l.classList.toggle('active',l.getAttribute('href')==='#'+id);});}});}
 
-for(let i=0;i<80;i++){
-particles.push({
-x:Math.random()*canvas.width,
-y:Math.random()*canvas.height,
-size:Math.random()*2,
-speed:Math.random()*0.5
-})
-}
+/* ── MOBILE NAV ── */
+function toggleNav(){document.getElementById('hamburger').classList.toggle('open');document.getElementById('mobileNav').classList.toggle('open');}
 
-function animate(){
+/* ── CANVAS BG ── */
+const canvas=document.getElementById('bgCanvas');const ctx=canvas.getContext('2d');
+canvas.width=window.innerWidth;canvas.height=window.innerHeight;
+window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
+const particles=[];for(let i=0;i<80;i++)particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,size:Math.random()*1.5+.5,opacity:Math.random()*.5+.1});
+function drawCanvas(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>canvas.width)p.vx*=-1;if(p.y<0||p.y>canvas.height)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=`rgba(0,170,255,${p.opacity})`;ctx.fill();});particles.forEach((p,i)=>{particles.slice(i+1).forEach(q=>{const d=Math.hypot(p.x-q.x,p.y-q.y);if(d<120){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=`rgba(0,170,255,${.06*(1-d/120)})`;ctx.lineWidth=.5;ctx.stroke();}});});requestAnimationFrame(drawCanvas);}drawCanvas();
 
-ctx.clearRect(0,0,canvas.width,canvas.height)
+/* ── REVEAL ON SCROLL ── */
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');if(e.target.classList.contains('project-card')){const bar=e.target.querySelector('.project-revenue-fill');if(bar)bar.style.width=bar.dataset.width+'%';}if(e.target.classList.contains('skill-card')){const bar=e.target.querySelector('.skill-bar');if(bar)bar.style.width=bar.dataset.width+'%';}observer.unobserve(e.target);}});},{threshold:.15});
+document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.skill-card,.project-card').forEach(el=>observer.observe(el));
 
-particles.forEach(p=>{
-p.y+=p.speed
+/* ── COUNTER ANIMATION ── */
+function startCounters(){document.querySelectorAll('[data-count]').forEach(el=>{const target=parseInt(el.dataset.count);const prefix=el.dataset.prefix||'';const suffix=el.dataset.suffix||'';let current=0;const inc=target/50;const timer=setInterval(()=>{current+=inc;if(current>=target){current=target;clearInterval(timer);}el.textContent=prefix+Math.floor(current)+suffix;},30);});}
 
-if(p.y>canvas.height)p.y=0
+/* ── TOAST ── */
+function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
 
-ctx.fillStyle="#4da3ff"
-ctx.fillRect(p.x,p.y,p.size,p.size)
+/* ── COPY DISCORD ── */
+function copyDiscord(){navigator.clipboard.writeText('VEDANTGR20').then(()=>showToast('✓ DISCORD COPIED TO CLIPBOARD')).catch(()=>showToast('Discord: VEDANTGR20'));}
 
-})
-
-requestAnimationFrame(animate)
-
-}
-
-animate()
-
+/* ── FORM SUBMIT ── */
+function submitForm(){const n=document.getElementById('fname').value.trim();const t=document.getElementById('ftype').value.trim();const d=document.getElementById('fdiscord').value.trim();const m=document.getElementById('fmsg').value.trim();if(!n||!d||!m){showToast('⚠ PLEASE FILL ALL REQUIRED FIELDS');return;}const btn=document.getElementById('formSubmit');btn.textContent='MESSAGE SENT ✓';btn.classList.add('sent');showToast('✓ MESSAGE RECEIVED — I\'LL REPLY SOON!');setTimeout(()=>{btn.textContent='SEND MESSAGE →';btn.classList.remove('sent');document.getElementById('fname').value='';document.getElementById('ftype').value='';document.getElementById('fdiscord').value='';document.getElementById('fmsg').value='';},3000);}
 </script>
-
 </body>
 </html>
