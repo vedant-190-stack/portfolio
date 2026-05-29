@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0"/>
 <title>VEDANTGR20 — Roblox Systems Developer</title>
-<meta name="description" content="Advanced Roblox Lua Developer | 5+ Years | $178K+ Revenue Generated"/>
+<meta name="description" content="Advanced Roblox Lua Developer | 5+ Years | 281K Robux Revenue Generated ($984 USD)"/>
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;700;900&family=Rajdhani:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
 /* ═══════════════════════════
@@ -31,7 +31,7 @@ img{max-width:100%;}
 /* ═══════════════════════════
    CUSTOM CURSOR
 ═══════════════════════════ */
-.cursor{position:fixed;width:12px;height:12px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .15s,height .15s,background .15s;mix-blend-mode:screen;}
+.cursor{position:fixed;width:12px;height:12px;background:var(--cyan);border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);transition:width .15s,height .15s,background .15s;}
 .cursor-ring{position:fixed;width:36px;height:36px;border:1px solid rgba(0,255,234,0.5);border-radius:50%;pointer-events:none;z-index:99998;transform:translate(-50%,-50%);transition:all .08s;mix-blend-mode:screen;}
 .cursor.hover{width:6px;height:6px;background:#fff;}
 .cursor-ring.hover{width:50px;height:50px;border-color:var(--blue);}
@@ -60,7 +60,7 @@ img{max-width:100%;}
 #bgCanvas{position:fixed;inset:0;z-index:0;pointer-events:none;}
 
 /* GRID OVERLAY */
-.grid-overlay{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(0,170,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,170,255,0.03) 1px,transparent 1px);background-size:60px 60px;}
+.grid-overlay{position:fixed;inset:0;z-index:0;pointer-events:none;background-image:linear-gradient(rgba(0,170,255,0.03) 1px,transparent 1px),linear-gradient(90deg,rgba(0,170,255,0.03) 1px,transparent 1px);background-size:50px 50px;}
 
 /* ═══════════════════════════
    HEADER & NAV
@@ -89,7 +89,7 @@ nav a.active{color:var(--blue);}
 .hamburger.open .ham-line:nth-child(3){transform:translateY(-7px) rotate(-45deg);}
 
 /* MOBILE NAV */
-.mobile-nav{position:fixed;inset:0;background:rgba(3,4,10,0.97);backdrop-filter:blur(20px);z-index:999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity .3s;}
+.mobile-nav{position:fixed;inset:0;background:rgba(3,4,10,0.97);backdrop-filter:blur(20px);z-index:999;display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:all .3s;}
 .mobile-nav.open{opacity:1;pointer-events:all;}
 .mobile-nav ul{list-style:none;display:flex;flex-direction:column;gap:32px;text-align:center;}
 .mobile-nav a{font-family:var(--font-head);font-size:22px;font-weight:700;letter-spacing:3px;color:var(--soft);transition:color .2s;}
@@ -100,7 +100,7 @@ nav a.active{color:var(--blue);}
 ═══════════════════════════ */
 .hero{position:relative;z-index:1;min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:0 5%;overflow:hidden;}
 .hero-content{position:relative;z-index:2;}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,170,255,0.08);border:1px solid rgba(0,170,255,0.2);border-radius:50px;padding:7px 18px;font-family:var(--font-head);font-size:10px;letter-spacing:2px;color:var(--blue);margin-bottom:28px;animation:fadeDown .8s ease both;}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(0,170,255,0.08);border:1px solid rgba(0,170,255,0.2);border-radius:50px;padding:7px 18px;font-family:var(--font-head);font-size:10px;letter-spacing:2px;color:var(--cyan);margin-bottom:20px;animation:fadeUp .8s ease both;}
 .hero-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:blink 1.5s infinite;}
 @keyframes blink{0%,100%{opacity:1;}50%{opacity:0;}}
 @keyframes fadeDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
@@ -116,12 +116,12 @@ nav a.active{color:var(--blue);}
 @keyframes glitch1{0%,90%,100%{transform:translate(0);}92%{transform:translate(-2px,1px);}95%{transform:translate(2px,-1px);}}
 @keyframes glitch2{0%,85%,100%{transform:translate(0);}88%{transform:translate(2px,-1px);}93%{transform:translate(-2px,1px);}}
 .hero-btns{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;animation:fadeUp .8s .55s ease both;}
-.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#000;font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:2px;padding:14px 32px;border-radius:4px;transition:all .2s;position:relative;overflow:hidden;}
+.btn-primary{display:inline-flex;align-items:center;gap:8px;background:var(--blue);color:#000;font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:2px;padding:14px 32px;border:none;border-radius:4px;cursor:pointer;position:relative;overflow:hidden;transition:all .2s;}
 .btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--cyan),var(--blue));opacity:0;transition:opacity .2s;}
 .btn-primary:hover::before{opacity:1;}
 .btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,170,255,0.4);}
 .btn-primary span{position:relative;z-index:1;}
-.btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--blue);font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:2px;padding:13px 32px;border-radius:4px;border:1px solid var(--blue);transition:all .2s;}
+.btn-outline{display:inline-flex;align-items:center;gap:8px;background:transparent;color:var(--blue);font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:2px;padding:13px 32px;border:1px solid var(--blue);border-radius:4px;cursor:pointer;transition:all .2s;position:relative;}
 .btn-outline:hover{background:rgba(0,170,255,0.1);transform:translateY(-2px);}
 .hero-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:8px;animation:fadeUp .8s .8s ease both;}
 .scroll-line{width:1px;height:50px;background:linear-gradient(to bottom,var(--blue),transparent);position:relative;overflow:hidden;}
@@ -145,7 +145,7 @@ nav a.active{color:var(--blue);}
 
 /* SECTION HEADER */
 .sec-header{text-align:center;margin-bottom:clamp(40px,6vw,72px);}
-.sec-tag{display:inline-block;font-family:var(--font-head);font-size:10px;letter-spacing:3px;color:var(--cyan);background:rgba(0,255,234,0.08);border:1px solid rgba(0,255,234,0.2);padding:5px 14px;border-radius:2px;margin-bottom:14px;}
+.sec-tag{display:inline-block;font-family:var(--font-head);font-size:10px;letter-spacing:3px;color:var(--cyan);background:rgba(0,255,234,0.08);border:1px solid rgba(0,255,234,0.2);padding:5px 14px;border-radius:4px;margin-bottom:16px;}
 .sec-title{font-family:var(--font-head);font-size:clamp(28px,5vw,48px);font-weight:900;letter-spacing:-1px;line-height:1.1;}
 .sec-title .accent{color:var(--blue);}
 .sec-line{width:60px;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));margin:16px auto 0;}
@@ -188,7 +188,7 @@ nav a.active{color:var(--blue);}
 .project-card:hover{transform:translateY(-6px);border-color:rgba(0,170,255,0.3);box-shadow:0 20px 60px rgba(0,170,255,0.1);}
 .project-card:hover::before{opacity:1;}
 .project-card:hover::after{transform:scaleX(1);}
-.project-icon{width:42px;height:42px;background:rgba(0,170,255,0.1);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:16px;}
+.project-icon{width:42px;height:42px;background:rgba(0,170,255,0.1);border:1px solid var(--border);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:14px;}
 .project-name{font-family:var(--font-head);font-size:clamp(13px,2vw,16px);font-weight:700;color:var(--blue);margin-bottom:6px;letter-spacing:.5px;}
 .project-role{font-size:12px;color:var(--muted);letter-spacing:1px;margin-bottom:14px;text-transform:uppercase;}
 .project-stats{display:flex;flex-direction:column;gap:8px;}
@@ -233,7 +233,7 @@ pre.code-block::-webkit-scrollbar-thumb{background:var(--border);}
 .skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px;}
 .skill-card{background:var(--card);border:1px solid var(--border);border-radius:8px;padding:20px;position:relative;overflow:hidden;transition:all .3s;}
 .skill-card:hover{border-color:rgba(0,170,255,0.3);transform:translateY(-3px);}
-.skill-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .4s;}
+.skill-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--blue),var(--cyan));transform:scaleX(0);transform-origin:left;transition:transform .3s;}
 .skill-card:hover::before{transform:scaleX(1);}
 .skill-icon{font-size:26px;margin-bottom:10px;}
 .skill-name{font-family:var(--font-head);font-size:12px;font-weight:700;color:var(--text);margin-bottom:6px;letter-spacing:.5px;}
@@ -283,13 +283,13 @@ pre.code-block::-webkit-scrollbar-thumb{background:var(--border);}
 .form-title{font-family:var(--font-head);font-size:13px;font-weight:700;color:var(--text);margin-bottom:20px;letter-spacing:1px;}
 .form-group{margin-bottom:16px;}
 .form-label{font-family:var(--font-head);font-size:10px;letter-spacing:2px;color:var(--muted);display:block;margin-bottom:6px;}
-.form-input{width:100%;background:rgba(0,170,255,0.04);border:1px solid var(--border);border-radius:4px;padding:12px 14px;color:var(--text);font-family:var(--font-body);font-size:14px;outline:none;transition:border-color .2s;}
+.form-input{width:100%;background:rgba(0,170,255,0.04);border:1px solid var(--border);border-radius:4px;padding:12px 14px;color:var(--text);font-family:var(--font-body);font-size:14px;outline:none;transition:all .2s;}
 .form-input:focus{border-color:rgba(0,170,255,0.4);box-shadow:0 0 0 3px rgba(0,170,255,0.06);}
 .form-input::placeholder{color:var(--muted);}
 textarea.form-input{resize:none;height:100px;}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
 @media(max-width:480px){.form-row{grid-template-columns:1fr;}}
-.form-submit{width:100%;padding:13px;background:var(--blue);color:#000;font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:2px;border:none;border-radius:4px;cursor:pointer;transition:all .2s;margin-top:4px;}
+.form-submit{width:100%;padding:13px;background:var(--blue);color:#000;font-family:var(--font-head);font-size:11px;font-weight:700;letter-spacing:2px;border:none;border-radius:4px;cursor:pointer;transition:all .2s;}
 .form-submit:hover{background:var(--cyan);transform:translateY(-1px);box-shadow:0 6px 20px rgba(0,170,255,0.3);}
 .form-submit.sent{background:#00ff64;color:#000;}
 
@@ -305,12 +305,12 @@ footer{position:relative;z-index:1;padding:40px 5%;border-top:1px solid var(--bo
 .footer-link:hover{color:var(--cyan);}
 
 /* BACK TO TOP */
-#backTop{position:fixed;bottom:28px;right:28px;width:42px;height:42px;background:rgba(0,170,255,0.1);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:500;opacity:0;pointer-events:none;transition:all .3s;font-size:18px;color:var(--blue);}
+#backTop{position:fixed;bottom:28px;right:28px;width:42px;height:42px;background:rgba(0,170,255,0.1);border:1px solid var(--border);border-radius:6px;display:flex;align-items:center;justify-content:center;color:var(--blue);font-family:var(--font-head);font-size:18px;cursor:pointer;opacity:0;pointer-events:none;transition:all .2s;z-index:100;}
 #backTop.visible{opacity:1;pointer-events:all;}
 #backTop:hover{background:var(--blue);color:#000;}
 
 /* TOAST */
-.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(0,255,100,0.1);border:1px solid rgba(0,255,100,0.25);backdrop-filter:blur(10px);border-radius:6px;padding:12px 24px;font-family:var(--font-head);font-size:11px;letter-spacing:1.5px;color:#00ff64;z-index:2000;opacity:0;transition:all .3s;white-space:nowrap;}
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:rgba(0,255,100,0.1);border:1px solid rgba(0,255,100,0.25);backdrop-filter:blur(10px);border-radius:6px;padding:12px 20px;font-family:var(--font-code);font-size:12px;color:#00ff64;opacity:0;pointer-events:none;transition:all .3s;z-index:10000;}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0);}
 
 /* SCANLINE */
@@ -406,8 +406,8 @@ footer{position:relative;z-index:1;padding:40px 5%;border-top:1px solid var(--bo
       </div>
       <div class="hstat-divider"></div>
       <div class="hstat">
-        <div class="hstat-val cyan" data-prefix="$" data-count="178">0</div>
-        <div class="hstat-label">Revenue (K+)</div>
+        <div class="hstat-val cyan" data-prefix="281K " data-count="1">0</div>
+        <div class="hstat-label">Robux Revenue</div>
       </div>
       <div class="hstat-divider"></div>
       <div class="hstat">
@@ -437,9 +437,9 @@ footer{position:relative;z-index:1;padding:40px 5%;border-top:1px solid var(--bo
     </div>
     <div class="about-grid">
       <div class="about-text reveal-left">
-        <p>I am <strong>VEDANTGR20</strong>, an advanced Roblox systems developer with <strong>5+ years</strong> of hands-on experience building complex, scalable gameplay systems from the ground up.</p>
-        <p>I specialize in <strong>server-client architecture</strong>, combat frameworks, real-time data systems, and performance optimization. My work has contributed to games generating over <strong>$178,000 in total revenue</strong>.</p>
-        <p>I've worked with multiple development teams across the Roblox platform, bringing strong engineering discipline and deep knowledge of <strong>Lua scripting patterns</strong> to every project.</p>
+        <p>I am <strong>VEDANTGR20</strong>, a professional Roblox systems developer with <strong>5+ years</strong> of hands-on experience building complex, scalable gameplay systems. My expertise spans combat frameworks, data persistence, real-time synchronization, and performance optimization.</p>
+        <p>I specialize in <strong>server-client architecture</strong>, advanced combat systems, robust data management, and smooth network communication. My projects have generated <strong>281,000 Robux ($984 USD)</strong> in combined revenue across multiple major releases.</p>
+        <p>I've collaborated with professional development teams across the Roblox platform, delivering production-grade systems with strong engineering discipline and proven expertise in <strong>Lua scripting patterns, optimization techniques, and architecture design</strong>.</p>
         <div class="about-tags">
           <span class="about-tag">COMBAT SYSTEMS</span>
           <span class="about-tag">DATASTORE</span>
@@ -458,12 +458,12 @@ footer{position:relative;z-index:1;padding:40px 5%;border-top:1px solid var(--bo
               <div class="about-stat-lbl">YEARS EXP</div>
             </div>
             <div class="about-stat">
-              <div class="about-stat-val">$178K+</div>
-              <div class="about-stat-lbl">REVENUE GEN.</div>
+              <div class="about-stat-val">281K</div>
+              <div class="about-stat-lbl">ROBUX GENERATED</div>
             </div>
             <div class="about-stat">
-              <div class="about-stat-val">4</div>
-              <div class="about-stat-lbl">MAJOR PROJECTS</div>
+              <div class="about-stat-val">$984</div>
+              <div class="about-stat-lbl">USD VALUE</div>
             </div>
             <div class="about-stat">
               <div class="about-stat-val">ADV</div>
@@ -494,44 +494,44 @@ footer{position:relative;z-index:1;padding:40px 5%;border-top:1px solid var(--bo
         <div class="project-name">Anime Rampage</div>
         <div class="project-role">Advanced Scripter</div>
         <div class="project-stats">
-          <div class="pstat"><span class="pstat-label">Revenue</span><span class="pstat-val green">$78,000</span></div>
-          <div class="pstat"><span class="pstat-label">Revenue Share</span><span class="pstat-val blue">10%</span></div>
-          <div class="pstat"><span class="pstat-label">Role</span><span class="pstat-val" style="color:var(--soft)">Systems Dev</span></div>
+          <div class="pstat"><span class="pstat-label">Revenue (Robux)</span><span class="pstat-val green">67,440</span></div>
+          <div class="pstat"><span class="pstat-label">% of Total</span><span class="pstat-val blue">24%</span></div>
+          <div class="pstat"><span class="pstat-label">USD Value</span><span class="pstat-val" style="color:#00ff64;">~$236</span></div>
         </div>
-        <div class="project-revenue-bar"><div class="project-revenue-fill" data-width="87"></div></div>
+        <div class="project-revenue-bar"><div class="project-revenue-fill" data-width="24"></div></div>
       </div>
       <div class="project-card reveal" style="transition-delay:.1s">
         <div class="project-icon">🌌</div>
         <div class="project-name">Anime Singularity</div>
         <div class="project-role">Scripter</div>
         <div class="project-stats">
-          <div class="pstat"><span class="pstat-label">Revenue</span><span class="pstat-val green">$13,400</span></div>
-          <div class="pstat"><span class="pstat-label">Revenue Share</span><span class="pstat-val blue">23%</span></div>
-          <div class="pstat"><span class="pstat-label">Role</span><span class="pstat-val" style="color:var(--soft)">Gameplay Dev</span></div>
+          <div class="pstat"><span class="pstat-label">Revenue (Robux)</span><span class="pstat-val green">56,200</span></div>
+          <div class="pstat"><span class="pstat-label">% of Total</span><span class="pstat-val blue">20%</span></div>
+          <div class="pstat"><span class="pstat-label">USD Value</span><span class="pstat-val" style="color:#00ff64;">~$197</span></div>
         </div>
-        <div class="project-revenue-bar"><div class="project-revenue-fill" data-width="45"></div></div>
+        <div class="project-revenue-bar"><div class="project-revenue-fill" data-width="20"></div></div>
       </div>
       <div class="project-card reveal" style="transition-delay:.2s">
         <div class="project-icon">🏢</div>
         <div class="project-name">Anime.Co</div>
         <div class="project-role">Scripter</div>
         <div class="project-stats">
-          <div class="pstat"><span class="pstat-label">Revenue</span><span class="pstat-val green">$6,900</span></div>
-          <div class="pstat"><span class="pstat-label">Revenue Share</span><span class="pstat-val blue">43%</span></div>
-          <div class="pstat"><span class="pstat-label">Role</span><span class="pstat-val" style="color:var(--soft)">Core Systems</span></div>
+          <div class="pstat"><span class="pstat-label">Revenue (Robux)</span><span class="pstat-val green">36,530</span></div>
+          <div class="pstat"><span class="pstat-label">% of Total</span><span class="pstat-val blue">13%</span></div>
+          <div class="pstat"><span class="pstat-label">USD Value</span><span class="pstat-val" style="color:#00ff64;">~$128</span></div>
         </div>
-        <div class="project-revenue-bar"><div class="project-revenue-fill" data-width="25"></div></div>
+        <div class="project-revenue-bar"><div class="project-revenue-fill" data-width="13"></div></div>
       </div>
       <div class="project-card reveal" style="transition-delay:.3s">
         <div class="project-icon">🚀</div>
         <div class="project-name">The Trio Development</div>
         <div class="project-role">Advanced Scripter</div>
         <div class="project-stats">
-          <div class="pstat"><span class="pstat-label">Revenue</span><span class="pstat-val green">$80,340</span></div>
-          <div class="pstat"><span class="pstat-label">Revenue Share</span><span class="pstat-val blue">12%</span></div>
-          <div class="pstat"><span class="pstat-label">Role</span><span class="pstat-val" style="color:var(--soft)">Lead Dev</span></div>
+          <div class="pstat"><span class="pstat-label">Revenue (Robux)</span><span class="pstat-val green">120,830</span></div>
+          <div class="pstat"><span class="pstat-label">% of Total</span><span class="pstat-val blue">43%</span></div>
+          <div class="pstat"><span class="pstat-label">USD Value</span><span class="pstat-val" style="color:#00ff64;">~$423</span></div>
         </div>
-        <div class="project-revenue-bar"><div class="project-revenue-fill" data-width="92"></div></div>
+        <div class="project-revenue-bar"><div class="project-revenue-fill" data-width="43"></div></div>
       </div>
     </div>
   </div>
@@ -650,13 +650,13 @@ footer{position:relative;z-index:1;padding:40px 5%;border-top:1px solid var(--bo
     </div>
     <div class="skills-grid">
       <div class="skill-card reveal"><div class="skill-icon">🔷</div><div class="skill-name">Advanced Lua</div><div class="skill-level">Expert · OOP, Metatables, Closures</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="95"></div></div></div>
-      <div class="skill-card reveal" style="transition-delay:.05s"><div class="skill-icon">🎮</div><div class="skill-name">Roblox Studio</div><div class="skill-level">Expert · Full IDE Proficiency</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="98"></div></div></div>
-      <div class="skill-card reveal" style="transition-delay:.1s"><div class="skill-icon">⚔️</div><div class="skill-name">Combat Systems</div><div class="skill-level">Expert · Hitboxes, Combos, VFX</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="93"></div></div></div>
-      <div class="skill-card reveal" style="transition-delay:.15s"><div class="skill-icon">✨</div><div class="skill-name">Ability Frameworks</div><div class="skill-level">Advanced · Cooldowns, Stacking</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="90"></div></div></div>
-      <div class="skill-card reveal" style="transition-delay:.2s"><div class="skill-icon">🎒</div><div class="skill-name">Inventory Systems</div><div class="skill-level">Advanced · Real-time Sync</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="88"></div></div></div>
-      <div class="skill-card reveal" style="transition-delay:.25s"><div class="skill-icon">📋</div><div class="skill-name">Quest Systems</div><div class="skill-level">Advanced · Dynamic Objectives</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="85"></div></div></div>
-      <div class="skill-card reveal" style="transition-delay:.3s"><div class="skill-icon">💾</div><div class="skill-name">DataStore Systems</div><div class="skill-level">Expert · Safe Save/Load</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="94"></div></div></div>
-      <div class="skill-card reveal" style="transition-delay:.35s"><div class="skill-icon">⚡</div><div class="skill-name">Server Optimization</div><div class="skill-level">Advanced · Memory, Performance</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="87"></div></div></div>
+      <div class="skill-card reveal" style="transition-delay:.05s"><div class="skill-icon">🎮</div><div class="skill-name">Roblox Studio</div><div class="skill-level">Expert · Full IDE Proficiency</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="92"></div></div></div>
+      <div class="skill-card reveal" style="transition-delay:.1s"><div class="skill-icon">⚔️</div><div class="skill-name">Combat Systems</div><div class="skill-level">Expert · Hitboxes, Combos, Animations</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="98"></div></div></div>
+      <div class="skill-card reveal" style="transition-delay:.15s"><div class="skill-icon">✨</div><div class="skill-name">Ability Frameworks</div><div class="skill-level">Advanced · Cooldowns, Casting, Queues</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="88"></div></div></div>
+      <div class="skill-card reveal" style="transition-delay:.2s"><div class="skill-icon">🎒</div><div class="skill-name">Inventory Systems</div><div class="skill-level">Advanced · Real-time Sync, UI Integration</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="90"></div></div></div>
+      <div class="skill-card reveal" style="transition-delay:.25s"><div class="skill-icon">📋</div><div class="skill-name">Quest Systems</div><div class="skill-level">Advanced · Dynamic Objectives, Rewards</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="85"></div></div></div>
+      <div class="skill-card reveal" style="transition-delay:.3s"><div class="skill-icon">💾</div><div class="skill-name">DataStore Systems</div><div class="skill-level">Expert · Safe Save/Load, Autosave</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="96"></div></div></div>
+      <div class="skill-card reveal" style="transition-delay:.35s"><div class="skill-icon">⚡</div><div class="skill-name">Server Optimization</div><div class="skill-level">Advanced · Memory, Performance, Profiling</div><div class="skill-bar-wrap"><div class="skill-bar" data-width="89"></div></div></div>
     </div>
   </div>
 </section>
@@ -670,12 +670,12 @@ footer{position:relative;z-index:1;padding:40px 5%;border-top:1px solid var(--bo
       <div class="sec-line"></div>
     </div>
     <div class="services-grid">
-      <div class="service-card reveal"><span class="service-icon">⚔️</span><div class="service-name">COMBAT SYSTEMS</div><div class="service-desc">Full combat frameworks with combos, hitboxes, animations, and server-validated damage systems.</div></div>
-      <div class="service-card reveal" style="transition-delay:.1s"><span class="service-icon">💾</span><div class="service-name">DATA SYSTEMS</div><div class="service-desc">Robust player data persistence with safe async handling, auto-save, and migration support.</div></div>
-      <div class="service-card reveal" style="transition-delay:.2s"><span class="service-icon">🎯</span><div class="service-name">ABILITY SYSTEMS</div><div class="service-desc">Modular ability frameworks with cooldowns, stacking mechanics, and visual effects integration.</div></div>
-      <div class="service-card reveal" style="transition-delay:.3s"><span class="service-icon">🌐</span><div class="service-name">NETWORKING</div><div class="service-desc">Secure RemoteEvent/Function architecture with server-side validation against exploits.</div></div>
-      <div class="service-card reveal" style="transition-delay:.4s"><span class="service-icon">📦</span><div class="service-name">INVENTORY & SHOP</div><div class="service-desc">Complete inventory systems with shop UIs, equipping, trading, and currency management.</div></div>
-      <div class="service-card reveal" style="transition-delay:.5s"><span class="service-icon">⚙️</span><div class="service-name">OPTIMIZATION</div><div class="service-desc">Performance auditing and optimization — memory management, rendering, and server load reduction.</div></div>
+      <div class="service-card reveal"><span class="service-icon">⚔️</span><div class="service-name">COMBAT SYSTEMS</div><div class="service-desc">Full combat frameworks with combos, hitboxes, knockback mechanics, and animation systems</div></div>
+      <div class="service-card reveal" style="transition-delay:.1s"><span class="service-icon">💾</span><div class="service-name">DATA SYSTEMS</div><div class="service-desc">Robust player data management with DataStore integration and automatic backup</div></div>
+      <div class="service-card reveal" style="transition-delay:.2s"><span class="service-icon">🎯</span><div class="service-name">ABILITY SYSTEMS</div><div class="service-desc">Modular ability frameworks with cooldowns, queuing, and special effects</div></div>
+      <div class="service-card reveal" style="transition-delay:.3s"><span class="service-icon">🌐</span><div class="service-name">NETWORKING</div><div class="service-desc">Secure RemoteEvent/Function communication with anti-exploit validation</div></div>
+      <div class="service-card reveal" style="transition-delay:.4s"><span class="service-icon">📦</span><div class="service-name">INVENTORY & SHOP</div><div class="service-desc">Complete inventory systems with UI, trading, and shop integration</div></div>
+      <div class="service-card reveal" style="transition-delay:.5s"><span class="service-icon">⚙️</span><div class="service-name">OPTIMIZATION</div><div class="service-desc">Performance audits, memory optimization, and server efficiency improvements</div></div>
     </div>
   </div>
 </section>
@@ -690,12 +690,12 @@ footer{position:relative;z-index:1;padding:40px 5%;border-top:1px solid var(--bo
     </div>
     <div class="contact-grid">
       <div class="contact-info reveal-left">
-        <p style="font-size:clamp(14px,2vw,16px);color:var(--soft);line-height:1.7;margin-bottom:24px;">Ready to bring your Roblox game to the next level? I'm available for freelance projects, revenue-share deals, and long-term team positions.</p>
+        <p style="font-size:clamp(14px,2vw,16px);color:var(--soft);line-height:1.7;margin-bottom:24px;">Ready to bring your Roblox game to the next level? I'm available for freelance projects, technical consulting, and long-term development roles. Let's discuss your vision.</p>
         <div class="contact-card" onclick="copyDiscord()">
           <div class="contact-card-icon" style="background:rgba(88,101,242,0.15);">💬</div>
           <div>
             <div class="contact-card-title">DISCORD</div>
-            <div class="contact-card-val">VEDANTGR20</div>
+            <div class="contact-card-val">velnix_vgr</div>
           </div>
         </div>
         <div class="contact-card">
@@ -745,7 +745,7 @@ footer{position:relative;z-index:1;padding:40px 5%;border-top:1px solid var(--bo
 <footer>
   <div class="footer-inner">
     <div class="footer-logo">VEDANT<span style="color:var(--cyan)">.</span>GR20</div>
-    <div class="footer-copy">© 2025 VEDANTGR20 · All Rights Reserved</div>
+    <div class="footer-copy">© 2025 VEDANTGR20 · Professional Roblox Development</div>
     <div class="footer-links">
       <a href="#home" class="footer-link">TOP</a>
       <a href="#projects" class="footer-link">PROJECTS</a>
@@ -762,7 +762,7 @@ footer{position:relative;z-index:1;padding:40px 5%;border-top:1px solid var(--bo
 
 <script>
 /* ── LOADER ── */
-window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('loader').classList.add('hidden');setTimeout(()=>document.getElementById('loader').style.display='none',600);startCounters();},2000);});
+window.addEventListener('load',()=>{setTimeout(()=>{document.getElementById('loader').classList.add('hidden');setTimeout(()=>document.getElementById('loader').style.display='none',600);startCounters();},500);});
 
 /* ── CURSOR ── */
 const cur=document.getElementById('cursor'),ring=document.getElementById('cursorRing');
@@ -772,10 +772,11 @@ function animRing(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;ring.style.left=rx+'px';ring
 document.querySelectorAll('a,button,.project-card,.service-card,.contact-card,.skill-card').forEach(el=>{el.addEventListener('mouseenter',()=>{cur.classList.add('hover');ring.classList.add('hover');});el.addEventListener('mouseleave',()=>{cur.classList.remove('hover');ring.classList.remove('hover');});});
 
 /* ── SCROLL PROGRESS ── */
-window.addEventListener('scroll',()=>{const s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight;document.getElementById('scrollBar').style.width=(s/h*100)+'%';document.getElementById('header').classList.toggle('scrolled',s>60);document.getElementById('backTop').classList.toggle('visible',s>400);updateActiveNav();});
+window.addEventListener('scroll',()=>{const s=document.documentElement.scrollTop,h=document.documentElement.scrollHeight-window.innerHeight;document.getElementById('scrollBar').style.width=(s/h*100)+'%';if(s>300){document.getElementById('backTop').classList.add('visible');}else{document.getElementById('backTop').classList.remove('visible');}if(s>80){document.getElementById('header').classList.add('scrolled');}else{document.getElementById('header').classList.remove('scrolled');}});
 
 /* ── ACTIVE NAV ── */
-function updateActiveNav(){const sections=['about','projects','code','skills','services','contact'];const links=document.querySelectorAll('nav a');sections.forEach(id=>{const el=document.getElementById(id);if(!el)return;const rect=el.getBoundingClientRect();if(rect.top<=100&&rect.bottom>=100){links.forEach(l=>{l.classList.toggle('active',l.getAttribute('href')==='#'+id);});}});}
+function updateActiveNav(){const sections=['about','projects','code','skills','services','contact'];const links=document.querySelectorAll('nav a');sections.forEach(id=>{const el=document.getElementById(id);if(!el)return;const rect=el.getBoundingClientRect();if(rect.top<=100&&rect.bottom>=100){links.forEach(l=>l.classList.remove('active'));const activeLink=document.querySelector(`nav a[href="#${id}"]`);if(activeLink)activeLink.classList.add('active');}});}
+window.addEventListener('scroll',updateActiveNav);
 
 /* ── MOBILE NAV ── */
 function toggleNav(){document.getElementById('hamburger').classList.toggle('open');document.getElementById('mobileNav').classList.toggle('open');}
@@ -784,24 +785,24 @@ function toggleNav(){document.getElementById('hamburger').classList.toggle('open
 const canvas=document.getElementById('bgCanvas');const ctx=canvas.getContext('2d');
 canvas.width=window.innerWidth;canvas.height=window.innerHeight;
 window.addEventListener('resize',()=>{canvas.width=window.innerWidth;canvas.height=window.innerHeight;});
-const particles=[];for(let i=0;i<80;i++)particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,size:Math.random()*1.5+.5,opacity:Math.random()*.5+.1});
-function drawCanvas(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>canvas.width)p.vx*=-1;if(p.y<0||p.y>canvas.height)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=`rgba(0,170,255,${p.opacity})`;ctx.fill();});particles.forEach((p,i)=>{particles.slice(i+1).forEach(q=>{const d=Math.hypot(p.x-q.x,p.y-q.y);if(d<120){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle=`rgba(0,170,255,${.06*(1-d/120)})`;ctx.lineWidth=.5;ctx.stroke();}});});requestAnimationFrame(drawCanvas);}drawCanvas();
+const particles=[];for(let i=0;i<80;i++)particles.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,size:Math.random()*1.5+.5,opacity:.3});
+function drawCanvas(){ctx.clearRect(0,0,canvas.width,canvas.height);particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;if(p.x<0||p.x>canvas.width)p.vx*=-1;if(p.y<0||p.y>canvas.height)p.vy*=-1;ctx.beginPath();ctx.arc(p.x,p.y,p.size,0,Math.PI*2);ctx.fillStyle=`rgba(0,170,255,${p.opacity})`;ctx.fill();});requestAnimationFrame(drawCanvas);}drawCanvas();
 
 /* ── REVEAL ON SCROLL ── */
-const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');if(e.target.classList.contains('project-card')){const bar=e.target.querySelector('.project-revenue-fill');if(bar)bar.style.width=bar.dataset.width+'%';}if(e.target.classList.contains('skill-card')){const bar=e.target.querySelector('.skill-bar');if(bar)bar.style.width=bar.dataset.width+'%';}observer.unobserve(e.target);}});},{threshold:.15});
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');if(e.target.classList.contains('project-card')){const bar=e.target.querySelector('.project-revenue-fill');if(bar){const width=bar.dataset.width;bar.style.width=width+'%';}}if(e.target.classList.contains('skill-card')){const bar=e.target.querySelector('.skill-bar');if(bar){const width=bar.dataset.width;bar.style.width=width+'%';}}}});});
 document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.skill-card,.project-card').forEach(el=>observer.observe(el));
 
 /* ── COUNTER ANIMATION ── */
-function startCounters(){document.querySelectorAll('[data-count]').forEach(el=>{const target=parseInt(el.dataset.count);const prefix=el.dataset.prefix||'';const suffix=el.dataset.suffix||'';let current=0;const inc=target/50;const timer=setInterval(()=>{current+=inc;if(current>=target){current=target;clearInterval(timer);}el.textContent=prefix+Math.floor(current)+suffix;},30);});}
+function startCounters(){document.querySelectorAll('[data-count]').forEach(el=>{const target=parseInt(el.dataset.count);const prefix=el.dataset.prefix||'';const suffix=el.dataset.suffix||'';let current=0;const increment=target/50;const counter=setInterval(()=>{current+=increment;if(current>=target){current=target;clearInterval(counter);}el.textContent=prefix+Math.floor(current)+suffix;},30);});document.querySelectorAll('[data-width]').forEach(el=>{setTimeout(()=>{const width=el.dataset.width;el.style.width=width+'%';},100);});}
 
 /* ── TOAST ── */
 function showToast(msg){const t=document.getElementById('toast');t.textContent=msg;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),3000);}
 
 /* ── COPY DISCORD ── */
-function copyDiscord(){navigator.clipboard.writeText('VEDANTGR20').then(()=>showToast('✓ DISCORD COPIED TO CLIPBOARD')).catch(()=>showToast('Discord: VEDANTGR20'));}
+function copyDiscord(){navigator.clipboard.writeText('velnix_vgr').then(()=>showToast('✓ DISCORD COPIED TO CLIPBOARD')).catch(()=>showToast('Discord: velnix_vgr'));}
 
 /* ── FORM SUBMIT ── */
-function submitForm(){const n=document.getElementById('fname').value.trim();const t=document.getElementById('ftype').value.trim();const d=document.getElementById('fdiscord').value.trim();const m=document.getElementById('fmsg').value.trim();if(!n||!d||!m){showToast('⚠ PLEASE FILL ALL REQUIRED FIELDS');return;}const btn=document.getElementById('formSubmit');btn.textContent='MESSAGE SENT ✓';btn.classList.add('sent');showToast('✓ MESSAGE RECEIVED — I\'LL REPLY SOON!');setTimeout(()=>{btn.textContent='SEND MESSAGE →';btn.classList.remove('sent');document.getElementById('fname').value='';document.getElementById('ftype').value='';document.getElementById('fdiscord').value='';document.getElementById('fmsg').value='';},3000);}
+function submitForm(){const n=document.getElementById('fname').value.trim();const t=document.getElementById('ftype').value.trim();const d=document.getElementById('fdiscord').value.trim();const m=document.getElementById('fmsg').value.trim();if(!n||!t||!d||!m){showToast('⚠ Please fill all fields');return;}const btn=document.getElementById('formSubmit');btn.textContent='✓ MESSAGE SENT';btn.classList.add('sent');setTimeout(()=>{document.getElementById('fname').value='';document.getElementById('ftype').value='';document.getElementById('fdiscord').value='';document.getElementById('fmsg').value='';btn.textContent='SEND MESSAGE →';btn.classList.remove('sent');},2000);showToast('✓ Message sent! Discord velnix_vgr')}
 </script>
 </body>
 </html>
